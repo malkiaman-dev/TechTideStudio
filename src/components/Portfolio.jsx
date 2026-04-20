@@ -1,5 +1,15 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import { Code2, Palette, Megaphone, ArrowUpRight, Layers, X, Calendar, Users, TrendingUp } from "lucide-react";
+import {
+  Code2,
+  Palette,
+  Megaphone,
+  ArrowUpRight,
+  Layers,
+  X,
+  Calendar,
+  Users,
+  TrendingUp,
+} from "lucide-react";
 import { createPortal } from "react-dom";
 
 const projects = [
@@ -9,7 +19,7 @@ const projects = [
     category: "web",
     categoryName: "Web Development",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=700&h=500&fit=crop",
-    description: "Interactive dashboard for real‑time financial analytics with AI-powered insights.",
+    description: "Interactive dashboard for real-time financial analytics with AI-powered insights.",
     longDescription: "A cutting-edge financial analytics platform that processes millions of transactions in real-time. The dashboard provides institutional investors with AI-driven market predictions, risk assessment tools, and portfolio optimization algorithms. Built with React and D3.js, it delivers 60fps visualizations even with large datasets.",
     challenge: "Existing solutions were slow and lacked predictive capabilities. Clients needed real-time data processing with intuitive visualizations.",
     outcome: "3.2x faster data processing, 40% increase in user engagement, and won 'Best FinTech Innovation' award.",
@@ -41,7 +51,7 @@ const projects = [
   },
   {
     id: 3,
-    title: "E‑commerce Growth",
+    title: "E-commerce Growth",
     category: "marketing",
     categoryName: "Digital Marketing",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&h=500&fit=crop",
@@ -63,7 +73,7 @@ const projects = [
     category: "web",
     categoryName: "Web Development",
     image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=700&h=500&fit=crop",
-    description: "Patient‑centric mobile app with appointment scheduling and telehealth.",
+    description: "Patient-centric mobile app with appointment scheduling and telehealth.",
     longDescription: "A HIPAA-compliant mobile application that connects patients with healthcare providers. Features include video consultations, prescription management, lab results, and secure messaging.",
     challenge: "Complex medical workflows needed simplification for elderly users while maintaining clinical accuracy and data security.",
     outcome: "4.9★ app store rating, 78% reduction in no-show appointments, and 120K+ downloads in first 3 months.",
@@ -99,7 +109,7 @@ const projects = [
     category: "marketing",
     categoryName: "Digital Marketing",
     image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=700&h=500&fit=crop",
-    description: "Multi‑channel launch strategy with email automation and social media ads.",
+    description: "Multi-channel launch strategy with email automation and social media ads.",
     longDescription: "Go-to-market strategy for a B2B project management SaaS. The launch included a 6-week pre-launch campaign, beta program, influencer partnerships, and post-launch retention automation.",
     challenge: "Competing against established players like Asana and Monday.com. Required a differentiated positioning and aggressive user acquisition.",
     outcome: "18K users on day one, 4.2x ROI in first month, and featured in 'Product Hunt' #2 product of the week.",
@@ -120,85 +130,159 @@ const categories = [
   { value: "marketing", label: "Marketing", icon: Megaphone },
 ];
 
-/* ── Utility: detect touch device ── */
 const isTouchDevice = () => {
-  if (typeof window === 'undefined') return false;
-  return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  if (typeof window === "undefined") return false;
+  return "ontouchstart" in window || navigator.maxTouchPoints > 0;
 };
 
-/* ── Magnetic cursor hook (disabled on touch) ── */
 const useMagnetic = (strength = 0.35) => {
   const ref = useRef(null);
-  const [isTouch, setIsTouch] = useState(false);
-  
-  useEffect(() => {
-    setIsTouch(isTouchDevice());
+
+  const handleMove = useCallback(
+    (e) => {
+      if (isTouchDevice()) return;
+      const el = ref.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = (e.clientX - cx) * strength;
+      const dy = (e.clientY - cy) * strength;
+      el.style.transform = `translate(${dx}px,${dy}px)`;
+    },
+    [strength]
+  );
+
+  const handleLeave = useCallback(() => {
+    if (ref.current) ref.current.style.transform = "translate(0,0)";
   }, []);
 
-  const handleMove = useCallback((e) => {
-    if (isTouch) return;
-    const el = ref.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    const dx = (e.clientX - cx) * strength;
-    const dy = (e.clientY - cy) * strength;
-    el.style.transform = `translate(${dx}px,${dy}px)`;
-  }, [strength, isTouch]);
-  
-  const handleLeave = useCallback(() => {
-    if (isTouch) return;
-    if (ref.current) ref.current.style.transform = "translate(0,0)";
-  }, [isTouch]);
-  
   return { ref, onMouseMove: handleMove, onMouseLeave: handleLeave };
 };
 
-/* ── Mobile‑friendly project card (no 3D tilt, tap to open) ── */
-const ProjectCard = ({ project, idx, visible, onClick }) => {
-  const [isTouch, setIsTouch] = useState(false);
-  const [hovered, setHovered] = useState(false);
-  
-  useEffect(() => {
-    setIsTouch(isTouchDevice());
-  }, []);
+const useReveal = (threshold = 0.1) => {
+  const ref = useRef(null);
+  const [vis, setVis] = useState(false);
 
-  const handleMouseEnter = () => !isTouch && setHovered(true);
-  const handleMouseLeave = () => !isTouch && setHovered(false);
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setVis(true);
+          obs.disconnect();
+        }
+      },
+      { threshold }
+    );
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, [threshold]);
+
+  return [ref, vis];
+};
+
+const Counter = ({ value, suffix = "" }) => {
+  const [count, setCount] = useState(0);
+  const [ref, vis] = useReveal(0.5);
+
+  useEffect(() => {
+    if (!vis) return;
+    const num = parseInt(value, 10);
+    if (Number.isNaN(num)) return;
+
+    let start = 0;
+    const step = Math.ceil(num / 40);
+
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= num) {
+        setCount(num);
+        clearInterval(timer);
+      } else {
+        setCount(start);
+      }
+    }, 30);
+
+    return () => clearInterval(timer);
+  }, [vis, value]);
 
   return (
-    <div
-      onClick={() => onClick(project)}
+    <span ref={ref}>
+      {Number.isNaN(parseInt(value, 10)) ? value : count}
+      {suffix}
+    </span>
+  );
+};
+
+const useBodyScrollLock = (locked) => {
+  useEffect(() => {
+    if (!locked) return;
+
+    const scrollY = window.scrollY || window.pageYOffset;
+    const originalStyle = {
+      overflow: document.body.style.overflow,
+      position: document.body.style.position,
+      top: document.body.style.top,
+      width: document.body.style.width,
+      left: document.body.style.left,
+      right: document.body.style.right,
+    };
+
+    document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.body.style.width = "100%";
+
+    return () => {
+      document.body.style.overflow = originalStyle.overflow;
+      document.body.style.position = originalStyle.position;
+      document.body.style.top = originalStyle.top;
+      document.body.style.width = originalStyle.width;
+      document.body.style.left = originalStyle.left;
+      document.body.style.right = originalStyle.right;
+      window.scrollTo(0, scrollY);
+    };
+  }, [locked]);
+};
+
+const ProjectCard = ({ project, idx, visible, onOpen }) => {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <button
+      type="button"
+      onClick={() => onOpen(project)}
+      className={`group relative rounded-2xl overflow-hidden text-left w-full transition-all duration-700 ${
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      }`}
       style={{
         transitionDelay: `${idx * 90}ms`,
-        transition: "transform 0.5s cubic-bezier(.23,1,.32,1), opacity 0.7s",
-        transform: visible ? "translateY(0)" : "translateY(16px)",
-        opacity: visible ? 1 : 0,
+        WebkitTapHighlightColor: "transparent",
+        touchAction: "manipulation",
       }}
-      className="group relative rounded-2xl overflow-hidden cursor-pointer"
+      onMouseEnter={() => !isTouchDevice() && setHovered(true)}
+      onMouseLeave={() => !isTouchDevice() && setHovered(false)}
     >
       <div
         className="relative h-full rounded-2xl overflow-hidden border transition-all duration-500"
         style={{
           background: "linear-gradient(135deg,rgba(255,255,255,0.05) 0%,rgba(255,255,255,0.02) 100%)",
           borderColor: hovered ? project.accent + "60" : "rgba(255,255,255,0.08)",
-          boxShadow: hovered ? `0 20px 40px ${project.accent}22` : "none",
+          boxShadow: hovered ? `0 24px 60px ${project.accent}20` : "none",
+          backdropFilter: "blur(12px)",
         }}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
       >
-        {/* Image section */}
         <div className="relative h-52 sm:h-56 overflow-hidden">
           <img
             src={project.image}
             alt={project.title}
             className="w-full h-full object-cover transition-transform duration-700"
-            style={{ transform: hovered ? "scale(1.05)" : "scale(1)" }}
+            style={{ transform: hovered ? "scale(1.08)" : "scale(1)" }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-          
-          {/* Stat badge (always visible on mobile) */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
+
           <div
             className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-bold"
             style={{
@@ -208,28 +292,65 @@ const ProjectCard = ({ project, idx, visible, onClick }) => {
           >
             {project.stat} {project.statLabel}
           </div>
+
+          <div
+            className="absolute bottom-3 right-3 flex items-center justify-center w-9 h-9 rounded-full border transition-all duration-300"
+            style={{
+              background: "rgba(0,0,0,0.45)",
+              borderColor: project.accent + "80",
+              color: project.accent,
+              opacity: hovered ? 1 : 0.85,
+            }}
+          >
+            <ArrowUpRight size={16} />
+          </div>
         </div>
 
-        {/* Content */}
         <div className="p-5">
           <div className="flex items-center gap-2 mb-3">
-            <div className="w-1.5 h-1.5 rounded-full" style={{ background: project.accent }} />
-            <span className="text-xs font-bold uppercase tracking-widest" style={{ color: project.accent }}>
+            <div
+              className="w-1.5 h-1.5 rounded-full"
+              style={{
+                background: project.accent,
+                boxShadow: hovered ? `0 0 10px ${project.accent}` : "none",
+              }}
+            />
+            <span
+              className="text-xs font-bold uppercase tracking-widest"
+              style={{ color: project.accent }}
+            >
               {project.categoryName}
             </span>
           </div>
-          <h3 className="text-lg font-extrabold text-white mb-2">{project.title}</h3>
-          <p className="text-sm text-white/50 leading-relaxed mb-4 line-clamp-2">{project.description}</p>
+
+          <h3 className="text-lg font-extrabold text-white mb-2 leading-snug tracking-tight">
+            {project.title}
+          </h3>
+
+          <p
+            className="text-sm leading-relaxed mb-4 transition-colors duration-300 line-clamp-2"
+            style={{ color: hovered ? "rgba(255,255,255,0.72)" : "rgba(255,255,255,0.5)" }}
+          >
+            {project.description}
+          </p>
+
           <div className="flex flex-wrap gap-1.5">
-            {project.tags.slice(0, 3).map((tag) => (
-              <span key={tag} className="text-xs px-2.5 py-1 rounded-full border border-white/10 text-white/40">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="text-xs px-2.5 py-1 rounded-full border transition-all duration-300"
+                style={{
+                  borderColor: hovered ? project.accent + "40" : "rgba(255,255,255,0.08)",
+                  color: hovered ? project.accent : "rgba(255,255,255,0.42)",
+                  background: hovered ? project.accent + "10" : "transparent",
+                }}
+              >
                 {tag}
               </span>
             ))}
           </div>
         </div>
 
-        {/* Bottom accent line */}
         <div
           className="absolute bottom-0 left-0 h-0.5 transition-all duration-500"
           style={{
@@ -238,27 +359,22 @@ const ProjectCard = ({ project, idx, visible, onClick }) => {
           }}
         />
       </div>
-    </div>
+    </button>
   );
 };
 
-/* ── Filter button ── */
 const FilterBtn = ({ cat, active, onClick }) => {
   const Icon = cat.icon;
   const magnetic = useMagnetic(0.3);
-  const [isTouch, setIsTouch] = useState(false);
-  
-  useEffect(() => {
-    setIsTouch(isTouchDevice());
-  }, []);
 
   return (
     <div
-      {...(isTouch ? {} : magnetic)}
+      {...(!isTouchDevice() ? magnetic : {})}
       className="inline-block"
       style={{ transition: "transform 0.3s cubic-bezier(.23,1,.32,1)" }}
     >
       <button
+        type="button"
         onClick={onClick}
         className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold tracking-wide transition-all duration-300 outline-none"
         style={
@@ -282,48 +398,9 @@ const FilterBtn = ({ cat, active, onClick }) => {
   );
 };
 
-/* ── Scroll reveal hook ── */
-const useReveal = (threshold = 0.1) => {
-  const ref = useRef(null);
-  const [vis, setVis] = useState(false);
-  useEffect(() => {
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setVis(true); obs.disconnect(); } }, { threshold });
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, [threshold]);
-  return [ref, vis];
-};
-
-/* ── Animated counter ── */
-const Counter = ({ value, suffix = "" }) => {
-  const [count, setCount] = useState(0);
-  const [ref, vis] = useReveal(0.5);
-  useEffect(() => {
-    if (!vis) return;
-    const num = parseInt(value);
-    if (isNaN(num)) return;
-    let start = 0;
-    const step = Math.ceil(num / 40);
-    const timer = setInterval(() => {
-      start += step;
-      if (start >= num) { setCount(num); clearInterval(timer); }
-      else setCount(start);
-    }, 30);
-    return () => clearInterval(timer);
-  }, [vis, value]);
-  return <span ref={ref}>{isNaN(parseInt(value)) ? value : count}{suffix}</span>;
-};
-
-/* ── Modal Components with stylish scrollbar ── */
 const Modal = ({ isOpen, onClose, children }) => {
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-    return () => { document.body.style.overflow = "unset"; };
-  }, [isOpen]);
+  const contentRef = useRef(null);
+  useBodyScrollLock(isOpen);
 
   useEffect(() => {
     const handleEsc = (e) => {
@@ -337,27 +414,30 @@ const Modal = ({ isOpen, onClose, children }) => {
 
   return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
       style={{ background: "rgba(0,0,0,0.85)", backdropFilter: "blur(12px)" }}
       onClick={onClose}
     >
       <div
+        ref={contentRef}
         className="relative max-w-5xl w-full max-h-[90vh] overflow-y-auto rounded-2xl"
         onClick={(e) => e.stopPropagation()}
         style={{
           background: "linear-gradient(135deg, rgba(10,10,15,0.98) 0%, rgba(5,5,10,0.98) 100%)",
           border: "1px solid rgba(255,255,255,0.1)",
           boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5)",
+          WebkitOverflowScrolling: "touch",
+          overscrollBehavior: "contain",
         }}
       >
         <button
+          type="button"
           onClick={onClose}
-          className="sticky top-4 right-4 z-10 p-2 rounded-full transition-all duration-200 hover:bg-white/10 float-right"
+          className="absolute top-4 right-4 z-10 p-2 rounded-full transition-all duration-200 hover:bg-white/10"
           style={{ color: "#fff" }}
         >
           <X size={20} />
         </button>
-        <div className="clear-both" />
         {children}
       </div>
     </div>,
@@ -384,15 +464,18 @@ const ProjectDetailModal = ({ project, onClose }) => {
             {project.stat} {project.statLabel}
           </div>
         </div>
-        <div className="md:w-1/2 p-6 md:p-8">
+
+        <div className="md:w-1/2 p-6 md:p-8 pt-14 md:pt-8">
           <div className="flex items-center gap-2 mb-4">
             <div className="w-2 h-2 rounded-full" style={{ background: project.accent }} />
             <span className="text-xs font-bold uppercase tracking-widest" style={{ color: project.accent }}>
               {project.categoryName}
             </span>
           </div>
+
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">{project.title}</h2>
           <p className="text-white/70 text-sm leading-relaxed mb-6">{project.longDescription || project.description}</p>
+
           <div className="space-y-4 mb-6">
             {project.challenge && (
               <div>
@@ -407,7 +490,8 @@ const ProjectDetailModal = ({ project, onClose }) => {
               </div>
             )}
           </div>
-          <div className="grid grid-cols-2 gap-4 mb-6">
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
             {project.client && (
               <div className="flex items-center gap-2">
                 <Users size={14} className="text-white/40" />
@@ -427,11 +511,12 @@ const ProjectDetailModal = ({ project, onClose }) => {
               </div>
             )}
           </div>
+
           {project.technologies && (
             <div className="mb-6">
               <h4 className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-2">Technologies</h4>
               <div className="flex flex-wrap gap-2">
-                {project.technologies.map(tech => (
+                {project.technologies.map((tech) => (
                   <span key={tech} className="text-xs px-2 py-1 rounded-full bg-white/5 border border-white/10 text-white/60">
                     {tech}
                   </span>
@@ -439,9 +524,14 @@ const ProjectDetailModal = ({ project, onClose }) => {
               </div>
             </div>
           )}
+
           <div className="flex flex-wrap gap-2">
-            {project.tags.map(tag => (
-              <span key={tag} className="text-xs px-2 py-1 rounded-full" style={{ background: `${project.accent}20`, color: project.accent }}>
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="text-xs px-2 py-1 rounded-full"
+                style={{ background: `${project.accent}20`, color: project.accent }}
+              >
                 {tag}
               </span>
             ))}
@@ -455,49 +545,22 @@ const ProjectDetailModal = ({ project, onClose }) => {
 const AllProjectsModal = ({ projects, onClose, onSelectProject }) => {
   return (
     <Modal isOpen={true} onClose={onClose}>
-      <div className="p-4 sm:p-6 md:p-8">
+      <div className="p-6 md:p-8 pt-14">
         <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">All Projects</h2>
         <p className="text-white/50 text-sm mb-6">Explore our complete portfolio of work</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
-          {projects.map((project) => (
-            <div
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-h-[70vh] overflow-y-auto pr-2">
+          {projects.map((project, idx) => (
+            <ProjectCard
               key={project.id}
-              onClick={() => {
-                onSelectProject(project);
+              project={project}
+              idx={idx}
+              visible={true}
+              onOpen={(selected) => {
                 onClose();
+                setTimeout(() => onSelectProject(selected), 140);
               }}
-              className="cursor-pointer transition-all duration-300 hover:scale-[1.02]"
-            >
-              <div
-                className="relative rounded-xl overflow-hidden border transition-all duration-300 hover:border-opacity-50"
-                style={{
-                  background: "linear-gradient(135deg,rgba(255,255,255,0.05) 0%,rgba(255,255,255,0.02) 100%)",
-                  borderColor: `${project.accent}40`,
-                }}
-              >
-                <div className="relative h-40 sm:h-44 overflow-hidden">
-                  <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                  <div
-                    className="absolute bottom-2 left-2 px-2 py-0.5 rounded text-[10px] font-bold"
-                    style={{ background: project.accent, color: project.accent === "#fcce00" ? "#000" : "#fff" }}
-                  >
-                    {project.stat} {project.statLabel}
-                  </div>
-                </div>
-                <div className="p-4">
-                  <h3 className="text-base font-bold text-white mb-1">{project.title}</h3>
-                  <p className="text-xs text-white/50 line-clamp-2">{project.description}</p>
-                  <div className="flex flex-wrap gap-1 mt-2">
-                    {project.tags.slice(0, 2).map(tag => (
-                      <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-white/10 text-white/50">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
+            />
           ))}
         </div>
       </div>
@@ -505,37 +568,34 @@ const AllProjectsModal = ({ projects, onClose, onSelectProject }) => {
   );
 };
 
-/* ── CTA Button (touch‑friendly) ── */
 const CtaButton = ({ onClick }) => {
   const magnetic = useMagnetic(0.25);
-  const [isTouch, setIsTouch] = useState(false);
-  
-  useEffect(() => {
-    setIsTouch(isTouchDevice());
-  }, []);
 
   return (
     <div
-      {...(isTouch ? {} : magnetic)}
+      {...(!isTouchDevice() ? magnetic : {})}
       style={{ transition: "transform 0.3s cubic-bezier(.23,1,.32,1)", display: "inline-block" }}
     >
       <button
+        type="button"
         onClick={onClick}
-        className="group relative inline-flex items-center gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-sm tracking-wide overflow-hidden transition-all duration-300"
+        className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold text-sm tracking-wide overflow-hidden transition-all duration-300"
         style={{ border: "1px solid rgba(8,159,241,0.35)", color: "#fff", background: "transparent" }}
       >
         <span
           className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           style={{ background: "linear-gradient(135deg,#089ff1,#02a1fe)" }}
         />
-        <span className="relative z-10 text-xs sm:text-sm">View All Case Studies</span>
-        <ArrowUpRight size={16} className="relative z-10 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+        <span className="relative z-10">View All Case Studies</span>
+        <ArrowUpRight
+          size={18}
+          className="relative z-10 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+        />
       </button>
     </div>
   );
 };
 
-/* ── Main Portfolio Component ── */
 const Portfolio = () => {
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedProject, setSelectedProject] = useState(null);
@@ -545,6 +605,8 @@ const Portfolio = () => {
   const sectionRef = useRef(null);
 
   useEffect(() => {
+    if (isTouchDevice()) return;
+
     const handleMove = (e) => {
       const section = sectionRef.current;
       if (section) {
@@ -555,11 +617,14 @@ const Portfolio = () => {
         section.style.setProperty("--my", y + "%");
       }
     };
+
     window.addEventListener("mousemove", handleMove);
     return () => window.removeEventListener("mousemove", handleMove);
   }, []);
 
-  const filtered = activeCategory === "all" ? projects : projects.filter((p) => p.category === activeCategory);
+  const filtered =
+    activeCategory === "all" ? projects : projects.filter((p) => p.category === activeCategory);
+
   const stats = [
     { value: "120", suffix: "+", label: "Projects Done" },
     { value: "98", suffix: "%", label: "Happy Clients" },
@@ -567,20 +632,18 @@ const Portfolio = () => {
     { value: "7", suffix: "yr", label: "Experience" },
   ];
 
-  const handleOpenProjectDetail = (project) => setSelectedProject(project);
-  const handleOpenAllProjects = () => setAllProjectsModalOpen(true);
-  const handleSelectProjectFromAll = (project) => setSelectedProject(project);
-
   return (
     <section
       id="portfolio-premium"
       ref={sectionRef}
-      className="relative py-24 md:py-32 overflow-hidden"
+      className="section-grid-bg relative py-24 md:py-32 overflow-hidden isolate"
       style={{
         background: "radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(8,159,241,0.08) 0%, rgba(0,0,0,0) 70%)",
       }}
     >
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 relative z-10">
+      <div className="grid-fade-mask pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 relative z-20">
         <div
           ref={headerRef}
           className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-700 ${
@@ -609,6 +672,7 @@ const Portfolio = () => {
               Our Work
             </span>
           </div>
+
           <h2
             style={{
               fontSize: "clamp(2rem, 5vw, 3.4rem)",
@@ -630,6 +694,7 @@ const Portfolio = () => {
             </span>{" "}
             that <span style={{ color: "#fcce00" }}>inspire</span>
           </h2>
+
           <p
             style={{
               color: "rgba(255, 255, 255, 0.65)",
@@ -680,7 +745,13 @@ const Portfolio = () => {
         <div ref={gridRef}>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
             {filtered.map((project, idx) => (
-              <ProjectCard key={project.id} project={project} idx={idx} visible={gridVis} onClick={handleOpenProjectDetail} />
+              <ProjectCard
+                key={project.id}
+                project={project}
+                idx={idx}
+                visible={gridVis}
+                onOpen={setSelectedProject}
+              />
             ))}
           </div>
         </div>
@@ -690,16 +761,20 @@ const Portfolio = () => {
             gridVis ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <CtaButton onClick={handleOpenAllProjects} />
+          <CtaButton onClick={() => setAllProjectsModalOpen(true)} />
         </div>
       </div>
 
-      <ProjectDetailModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+      <ProjectDetailModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
+
       {allProjectsModalOpen && (
         <AllProjectsModal
           projects={projects}
           onClose={() => setAllProjectsModalOpen(false)}
-          onSelectProject={handleSelectProjectFromAll}
+          onSelectProject={setSelectedProject}
         />
       )}
 
@@ -708,26 +783,12 @@ const Portfolio = () => {
           0% { transform: scale(1); opacity: 0.6; }
           100% { transform: scale(1.8); opacity: 0; }
         }
+
         .line-clamp-2 {
           display: -webkit-box;
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
           overflow: hidden;
-        }
-        /* Custom scrollbar for modal */
-        .overflow-y-auto::-webkit-scrollbar {
-          width: 6px;
-        }
-        .overflow-y-auto::-webkit-scrollbar-track {
-          background: rgba(255,255,255,0.05);
-          border-radius: 10px;
-        }
-        .overflow-y-auto::-webkit-scrollbar-thumb {
-          background: rgba(8,159,241,0.5);
-          border-radius: 10px;
-        }
-        .overflow-y-auto::-webkit-scrollbar-thumb:hover {
-          background: rgba(8,159,241,0.8);
         }
       `}</style>
     </section>

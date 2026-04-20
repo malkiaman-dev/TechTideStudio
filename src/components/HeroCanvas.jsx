@@ -1,4 +1,3 @@
-// herocanvas.jsx
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
@@ -29,6 +28,7 @@ export default function HeroCanvas() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.setSize(width, height);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.domElement.style.pointerEvents = "none";
 
     container.appendChild(renderer.domElement);
 
@@ -121,8 +121,11 @@ export default function HeroCanvas() {
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     };
 
-    container.addEventListener("pointermove", handlePointerMove);
-    container.addEventListener("pointerleave", handlePointerLeave);
+    if (!isTouchDevice()) {
+      window.addEventListener("pointermove", handlePointerMove, { passive: true });
+      window.addEventListener("pointerleave", handlePointerLeave);
+    }
+
     window.addEventListener("resize", handleResize);
 
     const clock = new THREE.Clock();
@@ -148,7 +151,7 @@ export default function HeroCanvas() {
       secondary.rotation.y = elapsed * 0.7;
       secondary.rotation.x = elapsed * 0.35;
 
-      if (!prefersReducedMotion) {
+      if (!prefersReducedMotion && !isTouchDevice()) {
         group.rotation.y += (mouse.x * 0.2 - group.rotation.y) * 0.03;
         group.rotation.x += (mouse.y * 0.12 - group.rotation.x) * 0.03;
         camera.position.x += (mouse.x * 0.25 - camera.position.x) * 0.03;
@@ -164,8 +167,11 @@ export default function HeroCanvas() {
     return () => {
       cancelAnimationFrame(frameId);
 
-      container.removeEventListener("pointermove", handlePointerMove);
-      container.removeEventListener("pointerleave", handlePointerLeave);
+      if (!isTouchDevice()) {
+        window.removeEventListener("pointermove", handlePointerMove);
+        window.removeEventListener("pointerleave", handlePointerLeave);
+      }
+
       window.removeEventListener("resize", handleResize);
 
       particleGeometry.dispose();
@@ -185,5 +191,10 @@ export default function HeroCanvas() {
     };
   }, []);
 
-  return <div ref={mountRef} className="absolute inset-0 z-0" />;
+  return <div ref={mountRef} className="absolute inset-0 z-0 pointer-events-none" />;
+}
+
+function isTouchDevice() {
+  if (typeof window === "undefined") return false;
+  return "ontouchstart" in window || navigator.maxTouchPoints > 0;
 }

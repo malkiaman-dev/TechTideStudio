@@ -30,6 +30,22 @@ body {
   color: #ffffff;
 }
 
+/* ===== SCROLLBAR (non‑blocking) ===== */
+body::-webkit-scrollbar {
+  width: 10px;
+}
+body::-webkit-scrollbar-track {
+  background: #05070c;
+}
+body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+}
+body::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* ===== NAVIGATION (no pointer‑event issues) ===== */
 .nav-shell {
   transition:
     background-color 0.35s ease,
@@ -38,7 +54,6 @@ body {
     backdrop-filter 0.35s ease,
     transform 0.35s ease;
 }
-
 .nav-shell.is-scrolled {
   background: rgba(7, 11, 18, 0.72);
   border-color: rgba(255, 255, 255, 0.12);
@@ -48,6 +63,7 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
+/* ===== HERO GRID (decorative, no click blocking) ===== */
 .hero-grid {
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
@@ -58,30 +74,10 @@ body {
     rgba(255, 255, 255, 0.85),
     rgba(255, 255, 255, 0.1)
   );
+  pointer-events: none; /* decorative only */
 }
 
-canvas {
-  display: block;
-}
-
-body::-webkit-scrollbar {
-  width: 10px;
-}
-
-body::-webkit-scrollbar-track {
-  background: #05070c;
-}
-
-body::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.14);
-  border-radius: 999px;
-}
-
-body::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.22);
-}
-
-/* Universal background wrapper for all sections except hero */
+/* ===== GLOBAL SECTION BACKGROUND (used across sections) ===== */
 .section-bg {
   position: relative;
   isolation: isolate;
@@ -91,11 +87,12 @@ body::-webkit-scrollbar-thumb:hover {
     linear-gradient(180deg, #05070d 0%, #040811 45%, #03060c 100%);
 }
 
+/* Decorative grid – NO pointer events */
 .section-bg::before {
   content: "";
   position: absolute;
   inset: 0;
-  pointer-events: none;
+  pointer-events: none;   /* critical */
   opacity: 0.22;
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
@@ -104,11 +101,12 @@ body::-webkit-scrollbar-thumb:hover {
   z-index: 0;
 }
 
+/* Decorative fade overlay – NO pointer events */
 .section-bg::after {
   content: "";
   position: absolute;
   inset: 0;
-  pointer-events: none;
+  pointer-events: none;   /* critical */
   z-index: 0;
   background:
     linear-gradient(
@@ -136,13 +134,13 @@ body::-webkit-scrollbar-thumb:hover {
   background: transparent; /* preserve existing background, only adds grid */
 }
 
+/* Grid lines – purely decorative */
 .section-grid-bg::before {
   content: "";
   position: absolute;
   inset: 0;
-  pointer-events: none;
+  pointer-events: none;   /* critical */
   z-index: 0;
-  /* 40px grid with cyan tint – exactly as in Services/About */
   background-image: 
     repeating-linear-gradient(transparent, transparent 39px, rgba(8, 159, 241, 0.08) 39px, rgba(8, 159, 241, 0.08) 40px),
     repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(8, 159, 241, 0.08) 39px, rgba(8, 159, 241, 0.08) 40px);
@@ -150,34 +148,58 @@ body::-webkit-scrollbar-thumb:hover {
   opacity: 0.35;
 }
 
-/* Mouse‑following glow (adds interactivity) */
+/* Mouse‑following glow – decorative, never blocks */
 .section-grid-bg::after {
   content: "";
   position: absolute;
   inset: 0;
-  pointer-events: none;
+  pointer-events: none;   /* critical */
   z-index: 0;
   background: radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(8, 159, 241, 0.15), transparent 60%);
   opacity: 0;
   transition: opacity 0.2s;
 }
 
-/* Optional: enable glow on hover over the whole section */
 .section-grid-bg:hover::after {
   opacity: 1;
 }
 
-/* Radial fade to soften edges (matches Services/About) */
+/* Radial fade mask – decorative */
 .grid-fade-mask {
   position: absolute;
   inset: 0;
-  pointer-events: none;
+  pointer-events: none;   /* critical */
   z-index: 0;
   background: radial-gradient(circle at 50% 30%, transparent 40%, rgba(0, 0, 0, 0.6) 90%);
 }
 
-/* Ensure content sits above the grid */
-.section-grid-bg > * {
+/* Ensure content sits above all decorative layers */
+.section-grid-bg > *,
+.section-bg > * {
   position: relative;
   z-index: 1;
 }
+
+/* ===== ADDITIONAL SAFETY FOR MODALS & INTERACTIVE ZONES ===== */
+/* Any canvas element must not block clicks (e.g., Three.js backgrounds) */
+canvas {
+  display: block;
+  pointer-events: none;  /* unless you need canvas interaction, keep none */
+}
+
+/* Ensure all interactive elements (buttons, cards, links) are above decorations */
+button,
+a,
+[role="button"],
+.cursor-pointer {
+  position: relative;
+  z-index: 2;  /* sits above any decorative pseudo-elements */
+}
+
+/* For the Portfolio section specifically – strong stacking context */
+#portfolio-premium {
+  isolation: isolate;
+}
+
+/* Optional: if you use any overlay that should block, do it explicitly via JS/CSS,
+   but for decorative layers they must never intercept. */
