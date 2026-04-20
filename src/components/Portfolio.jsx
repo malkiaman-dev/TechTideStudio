@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import { Code2, Palette, Megaphone, ArrowUpRight, Layers } from "lucide-react";
+import { Code2, Palette, Megaphone, ArrowUpRight, Layers, X, Calendar, Users, TrendingUp } from "lucide-react";
+import { createPortal } from "react-dom";
 
 const projects = [
   {
@@ -9,10 +10,16 @@ const projects = [
     categoryName: "Web Development",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=700&h=500&fit=crop",
     description: "Interactive dashboard for real‑time financial analytics with AI-powered insights.",
+    longDescription: "A cutting-edge financial analytics platform that processes millions of transactions in real-time. The dashboard provides institutional investors with AI-driven market predictions, risk assessment tools, and portfolio optimization algorithms. Built with React and D3.js, it delivers 60fps visualizations even with large datasets.",
+    challenge: "Existing solutions were slow and lacked predictive capabilities. Clients needed real-time data processing with intuitive visualizations.",
+    outcome: "3.2x faster data processing, 40% increase in user engagement, and won 'Best FinTech Innovation' award.",
     tags: ["React", "D3.js", "Tailwind"],
     accent: "#089ff1",
     stat: "3.2x",
     statLabel: "Performance",
+    client: "Vanguard Group",
+    year: "2024",
+    technologies: ["React 18", "D3.js", "Node.js", "WebSockets", "Tailwind CSS"]
   },
   {
     id: 2,
@@ -21,10 +28,16 @@ const projects = [
     categoryName: "Graphic Design",
     image: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=700&h=500&fit=crop",
     description: "Complete brand identity including logo, stationery, and comprehensive guidelines.",
+    longDescription: "A complete rebranding for a high-end watchmaker, including logo design, color palette, typography system, packaging, and digital assets. The identity reflects precision craftsmanship and timeless elegance.",
+    challenge: "The brand needed to differentiate from competitors while maintaining heritage appeal. Consistency across print, digital, and product packaging was critical.",
+    outcome: "12 deliverables produced, brand recognition increased by 65%, featured in 'Brand Identity 2024' publication.",
     tags: ["Logo", "Typography", "Branding"],
     accent: "#fcce00",
     stat: "12",
     statLabel: "Deliverables",
+    client: "Horologe Suisse",
+    year: "2023",
+    technologies: ["Adobe Illustrator", "Photoshop", "Figma", "InDesign"]
   },
   {
     id: 3,
@@ -33,10 +46,16 @@ const projects = [
     categoryName: "Digital Marketing",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&h=500&fit=crop",
     description: "SEO + PPC campaign that increased revenue by 240% in six months.",
+    longDescription: "A comprehensive digital marketing strategy for a D2C sustainable fashion brand. The campaign combined technical SEO overhaul, targeted Google Shopping campaigns, and TikTok influencer partnerships.",
+    challenge: "High competition in sustainable fashion space with limited budget. Needed to achieve ROI positive within first quarter.",
+    outcome: "240% revenue increase, 180% ROAS, #1 ranking for 12 target keywords, and 45% reduction in CAC.",
     tags: ["SEO", "PPC", "Analytics"],
     accent: "#02a1fe",
     stat: "240%",
     statLabel: "Revenue Uplift",
+    client: "EcoWear Collective",
+    year: "2024",
+    technologies: ["Google Analytics 4", "Semrush", "Meta Ads", "Shopify"]
   },
   {
     id: 4,
@@ -45,10 +64,16 @@ const projects = [
     categoryName: "Web Development",
     image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=700&h=500&fit=crop",
     description: "Patient‑centric mobile app with appointment scheduling and telehealth.",
+    longDescription: "A HIPAA-compliant mobile application that connects patients with healthcare providers. Features include video consultations, prescription management, lab results, and secure messaging.",
+    challenge: "Complex medical workflows needed simplification for elderly users while maintaining clinical accuracy and data security.",
+    outcome: "4.9★ app store rating, 78% reduction in no-show appointments, and 120K+ downloads in first 3 months.",
     tags: ["Figma", "Prototype", "Usability"],
     accent: "#089ff1",
     stat: "4.9★",
     statLabel: "App Rating",
+    client: "HealthFirst Network",
+    year: "2023",
+    technologies: ["Figma", "React Native", "Firebase", "Twilio"]
   },
   {
     id: 5,
@@ -57,10 +82,16 @@ const projects = [
     categoryName: "Graphic Design",
     image: "https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=700&h=500&fit=crop",
     description: "Sustainable packaging that tells a brand story through illustration and print.",
+    longDescription: "Eco-friendly packaging system for a farm-to-table restaurant chain. The design uses soy-based inks, recycled materials, and hand-drawn illustrations that tell the story of local farming partnerships.",
+    challenge: "Creating a premium unboxing experience while maintaining compostable materials and cost efficiency.",
+    outcome: "8 SKUs designed, 32% increase in social media unboxing shares, won 'Sustainable Design Award 2024'.",
     tags: ["Packaging", "Illustration", "Print"],
     accent: "#fcce00",
     stat: "8",
     statLabel: "SKUs Designed",
+    client: "Harvest Table",
+    year: "2024",
+    technologies: ["Adobe Illustrator", "Procreate", "Packaging mockup tools"]
   },
   {
     id: 6,
@@ -69,11 +100,17 @@ const projects = [
     categoryName: "Digital Marketing",
     image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=700&h=500&fit=crop",
     description: "Multi‑channel launch strategy with email automation and social media ads.",
+    longDescription: "Go-to-market strategy for a B2B project management SaaS. The launch included a 6-week pre-launch campaign, beta program, influencer partnerships, and post-launch retention automation.",
+    challenge: "Competing against established players like Asana and Monday.com. Required a differentiated positioning and aggressive user acquisition.",
+    outcome: "18K users on day one, 4.2x ROI in first month, and featured in 'Product Hunt' #2 product of the week.",
     tags: ["Email", "Social Ads", "Automation"],
     accent: "#02a1fe",
     stat: "18K",
     statLabel: "Users Day 1",
-  },
+    client: "TaskFlow AI",
+    year: "2024",
+    technologies: ["HubSpot", "LinkedIn Ads", "Google Ads", "Zapier"]
+  }
 ];
 
 const categories = [
@@ -83,10 +120,23 @@ const categories = [
   { value: "marketing", label: "Marketing", icon: Megaphone },
 ];
 
-/* ── Magnetic cursor hook ── */
+/* ── Utility: detect touch device ── */
+const isTouchDevice = () => {
+  if (typeof window === 'undefined') return false;
+  return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+};
+
+/* ── Magnetic cursor hook (disabled on touch) ── */
 const useMagnetic = (strength = 0.35) => {
   const ref = useRef(null);
+  const [isTouch, setIsTouch] = useState(false);
+  
+  useEffect(() => {
+    setIsTouch(isTouchDevice());
+  }, []);
+
   const handleMove = useCallback((e) => {
+    if (isTouch) return;
     const el = ref.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
@@ -95,157 +145,84 @@ const useMagnetic = (strength = 0.35) => {
     const dx = (e.clientX - cx) * strength;
     const dy = (e.clientY - cy) * strength;
     el.style.transform = `translate(${dx}px,${dy}px)`;
-  }, [strength]);
+  }, [strength, isTouch]);
+  
   const handleLeave = useCallback(() => {
+    if (isTouch) return;
     if (ref.current) ref.current.style.transform = "translate(0,0)";
-  }, []);
+  }, [isTouch]);
+  
   return { ref, onMouseMove: handleMove, onMouseLeave: handleLeave };
 };
 
-/* ── 3D tilt card ── */
-const TiltCard = ({ project, idx, visible }) => {
-  const cardRef = useRef(null);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+/* ── Mobile‑friendly project card (no 3D tilt, tap to open) ── */
+const ProjectCard = ({ project, idx, visible, onClick }) => {
+  const [isTouch, setIsTouch] = useState(false);
   const [hovered, setHovered] = useState(false);
-  const [shine, setShine] = useState({ x: 50, y: 50 });
+  
+  useEffect(() => {
+    setIsTouch(isTouchDevice());
+  }, []);
 
-  const handleMouseMove = (e) => {
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const cx = rect.width / 2;
-    const cy = rect.height / 2;
-    setTilt({ x: -(y - cy) / 18, y: (x - cx) / 18 });
-    setShine({ x: (x / rect.width) * 100, y: (y / rect.height) * 100 });
-  };
+  const handleMouseEnter = () => !isTouch && setHovered(true);
+  const handleMouseLeave = () => !isTouch && setHovered(false);
 
   return (
     <div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => { setTilt({ x: 0, y: 0 }); setHovered(false); }}
+      onClick={() => onClick(project)}
       style={{
         transitionDelay: `${idx * 90}ms`,
-        transform: hovered
-          ? `perspective(900px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) translateY(-10px) scale(1.02)`
-          : "perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)",
-        transition: hovered ? "transform 0.1s ease-out" : "transform 0.5s cubic-bezier(.23,1,.32,1)",
+        transition: "transform 0.5s cubic-bezier(.23,1,.32,1), opacity 0.7s",
+        transform: visible ? "translateY(0)" : "translateY(16px)",
+        opacity: visible ? 1 : 0,
       }}
-      className={`group relative rounded-2xl overflow-hidden cursor-pointer transition-opacity duration-700 ${
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
-      }`}
+      className="group relative rounded-2xl overflow-hidden cursor-pointer"
     >
-      {/* Card shell */}
       <div
         className="relative h-full rounded-2xl overflow-hidden border transition-all duration-500"
         style={{
           background: "linear-gradient(135deg,rgba(255,255,255,0.05) 0%,rgba(255,255,255,0.02) 100%)",
           borderColor: hovered ? project.accent + "60" : "rgba(255,255,255,0.08)",
-          boxShadow: hovered ? `0 30px 80px ${project.accent}22, 0 0 0 1px ${project.accent}30` : "none",
-          backdropFilter: "blur(12px)",
+          boxShadow: hovered ? `0 20px 40px ${project.accent}22` : "none",
         }}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
-        {/* Shine overlay */}
-        {hovered && (
-          <div
-            className="absolute inset-0 pointer-events-none z-20 rounded-2xl"
-            style={{
-              background: `radial-gradient(circle at ${shine.x}% ${shine.y}%, rgba(255,255,255,0.06) 0%, transparent 60%)`,
-            }}
-          />
-        )}
-
-        {/* Image */}
+        {/* Image section */}
         <div className="relative h-52 sm:h-56 overflow-hidden">
           <img
             src={project.image}
             alt={project.title}
             className="w-full h-full object-cover transition-transform duration-700"
-            style={{ transform: hovered ? "scale(1.12)" : "scale(1)" }}
+            style={{ transform: hovered ? "scale(1.05)" : "scale(1)" }}
           />
-          {/* Image overlay gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+          
+          {/* Stat badge (always visible on mobile) */}
           <div
-            className="absolute inset-0 transition-opacity duration-400"
-            style={{
-              background: `linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)`,
-              opacity: hovered ? 1 : 0.4,
-            }}
-          />
-
-          {/* Stat badge */}
-          <div
-            className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-bold tracking-wide transition-all duration-400"
+            className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-bold"
             style={{
               background: project.accent,
               color: project.accent === "#fcce00" ? "#000" : "#fff",
-              transform: hovered ? "translateY(0) scale(1)" : "translateY(-4px) scale(0.9)",
-              opacity: hovered ? 1 : 0,
             }}
           >
             {project.stat} {project.statLabel}
           </div>
-
-          {/* External link */}
-          <a
-            href="#"
-            className="absolute bottom-3 right-3 flex items-center justify-center w-9 h-9 rounded-full backdrop-blur-md border transition-all duration-300"
-            style={{
-              background: "rgba(0,0,0,0.5)",
-              borderColor: project.accent + "80",
-              transform: hovered ? "scale(1) rotate(0deg)" : "scale(0.7) rotate(-15deg)",
-              opacity: hovered ? 1 : 0,
-              color: project.accent,
-            }}
-          >
-            <ArrowUpRight size={16} />
-          </a>
         </div>
 
-        {/* Body */}
+        {/* Content */}
         <div className="p-5">
-          {/* Category */}
           <div className="flex items-center gap-2 mb-3">
-            <div
-              className="w-1.5 h-1.5 rounded-full transition-all duration-400"
-              style={{
-                background: project.accent,
-                boxShadow: hovered ? `0 0 8px ${project.accent}` : "none",
-              }}
-            />
-            <span
-              className="text-xs font-bold uppercase tracking-widest"
-              style={{ color: project.accent }}
-            >
+            <div className="w-1.5 h-1.5 rounded-full" style={{ background: project.accent }} />
+            <span className="text-xs font-bold uppercase tracking-widest" style={{ color: project.accent }}>
               {project.categoryName}
             </span>
           </div>
-
-          {/* Title */}
-          <h3 className="text-lg font-extrabold text-white mb-2 leading-snug tracking-tight">
-            {project.title}
-          </h3>
-
-          {/* Description */}
-          <p
-            className="text-sm leading-relaxed mb-4 transition-all duration-500"
-            style={{ color: hovered ? "rgba(255,255,255,0.75)" : "rgba(255,255,255,0.45)" }}
-          >
-            {project.description}
-          </p>
-
-          {/* Tags */}
+          <h3 className="text-lg font-extrabold text-white mb-2">{project.title}</h3>
+          <p className="text-sm text-white/50 leading-relaxed mb-4 line-clamp-2">{project.description}</p>
           <div className="flex flex-wrap gap-1.5">
-            {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="text-xs px-2.5 py-1 rounded-full border transition-all duration-300"
-                style={{
-                  borderColor: hovered ? project.accent + "40" : "rgba(255,255,255,0.08)",
-                  color: hovered ? project.accent : "rgba(255,255,255,0.4)",
-                  background: hovered ? project.accent + "10" : "transparent",
-                }}
-              >
+            {project.tags.slice(0, 3).map((tag) => (
+              <span key={tag} className="text-xs px-2.5 py-1 rounded-full border border-white/10 text-white/40">
                 {tag}
               </span>
             ))}
@@ -269,10 +246,15 @@ const TiltCard = ({ project, idx, visible }) => {
 const FilterBtn = ({ cat, active, onClick }) => {
   const Icon = cat.icon;
   const magnetic = useMagnetic(0.3);
+  const [isTouch, setIsTouch] = useState(false);
+  
+  useEffect(() => {
+    setIsTouch(isTouchDevice());
+  }, []);
 
   return (
     <div
-      {...magnetic}
+      {...(isTouch ? {} : magnetic)}
       className="inline-block"
       style={{ transition: "transform 0.3s cubic-bezier(.23,1,.32,1)" }}
     >
@@ -293,9 +275,7 @@ const FilterBtn = ({ cat, active, onClick }) => {
               }
         }
       >
-        {Icon && (
-          <Icon size={15} style={{ color: active ? "#fff" : "#089ff1" }} />
-        )}
+        {Icon && <Icon size={15} style={{ color: active ? "#fff" : "#089ff1" }} />}
         {cat.label}
       </button>
     </div>
@@ -334,41 +314,236 @@ const Counter = ({ value, suffix = "" }) => {
   return <span ref={ref}>{isNaN(parseInt(value)) ? value : count}{suffix}</span>;
 };
 
-/* ── CTA Button ── */
-const CtaButton = () => {
+/* ── Modal Components with stylish scrollbar ── */
+const Modal = ({ isOpen, onClose, children }) => {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => { document.body.style.overflow = "unset"; };
+  }, [isOpen]);
+
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === "Escape") onClose();
+    };
+    if (isOpen) window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, [isOpen, onClose]);
+
+  if (!isOpen) return null;
+
+  return createPortal(
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      style={{ background: "rgba(0,0,0,0.85)", backdropFilter: "blur(12px)" }}
+      onClick={onClose}
+    >
+      <div
+        className="relative max-w-5xl w-full max-h-[90vh] overflow-y-auto rounded-2xl"
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          background: "linear-gradient(135deg, rgba(10,10,15,0.98) 0%, rgba(5,5,10,0.98) 100%)",
+          border: "1px solid rgba(255,255,255,0.1)",
+          boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5)",
+        }}
+      >
+        <button
+          onClick={onClose}
+          className="sticky top-4 right-4 z-10 p-2 rounded-full transition-all duration-200 hover:bg-white/10 float-right"
+          style={{ color: "#fff" }}
+        >
+          <X size={20} />
+        </button>
+        <div className="clear-both" />
+        {children}
+      </div>
+    </div>,
+    document.body
+  );
+};
+
+const ProjectDetailModal = ({ project, onClose }) => {
+  if (!project) return null;
+
+  return (
+    <Modal isOpen={!!project} onClose={onClose}>
+      <div className="flex flex-col md:flex-row">
+        <div className="md:w-1/2 relative">
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-64 md:h-full object-cover rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none"
+          />
+          <div
+            className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold"
+            style={{ background: project.accent, color: project.accent === "#fcce00" ? "#000" : "#fff" }}
+          >
+            {project.stat} {project.statLabel}
+          </div>
+        </div>
+        <div className="md:w-1/2 p-6 md:p-8">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-2 h-2 rounded-full" style={{ background: project.accent }} />
+            <span className="text-xs font-bold uppercase tracking-widest" style={{ color: project.accent }}>
+              {project.categoryName}
+            </span>
+          </div>
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">{project.title}</h2>
+          <p className="text-white/70 text-sm leading-relaxed mb-6">{project.longDescription || project.description}</p>
+          <div className="space-y-4 mb-6">
+            {project.challenge && (
+              <div>
+                <h4 className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-1">Challenge</h4>
+                <p className="text-white/70 text-sm">{project.challenge}</p>
+              </div>
+            )}
+            {project.outcome && (
+              <div>
+                <h4 className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-1">Outcome</h4>
+                <p className="text-white/70 text-sm">{project.outcome}</p>
+              </div>
+            )}
+          </div>
+          <div className="grid grid-cols-2 gap-4 mb-6">
+            {project.client && (
+              <div className="flex items-center gap-2">
+                <Users size={14} className="text-white/40" />
+                <span className="text-white/60 text-xs">{project.client}</span>
+              </div>
+            )}
+            {project.year && (
+              <div className="flex items-center gap-2">
+                <Calendar size={14} className="text-white/40" />
+                <span className="text-white/60 text-xs">{project.year}</span>
+              </div>
+            )}
+            {project.stat && (
+              <div className="flex items-center gap-2">
+                <TrendingUp size={14} className="text-white/40" />
+                <span className="text-white/60 text-xs">{project.stat} {project.statLabel}</span>
+              </div>
+            )}
+          </div>
+          {project.technologies && (
+            <div className="mb-6">
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-2">Technologies</h4>
+              <div className="flex flex-wrap gap-2">
+                {project.technologies.map(tech => (
+                  <span key={tech} className="text-xs px-2 py-1 rounded-full bg-white/5 border border-white/10 text-white/60">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+          <div className="flex flex-wrap gap-2">
+            {project.tags.map(tag => (
+              <span key={tag} className="text-xs px-2 py-1 rounded-full" style={{ background: `${project.accent}20`, color: project.accent }}>
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Modal>
+  );
+};
+
+const AllProjectsModal = ({ projects, onClose, onSelectProject }) => {
+  return (
+    <Modal isOpen={true} onClose={onClose}>
+      <div className="p-4 sm:p-6 md:p-8">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">All Projects</h2>
+        <p className="text-white/50 text-sm mb-6">Explore our complete portfolio of work</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
+          {projects.map((project) => (
+            <div
+              key={project.id}
+              onClick={() => {
+                onSelectProject(project);
+                onClose();
+              }}
+              className="cursor-pointer transition-all duration-300 hover:scale-[1.02]"
+            >
+              <div
+                className="relative rounded-xl overflow-hidden border transition-all duration-300 hover:border-opacity-50"
+                style={{
+                  background: "linear-gradient(135deg,rgba(255,255,255,0.05) 0%,rgba(255,255,255,0.02) 100%)",
+                  borderColor: `${project.accent}40`,
+                }}
+              >
+                <div className="relative h-40 sm:h-44 overflow-hidden">
+                  <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                  <div
+                    className="absolute bottom-2 left-2 px-2 py-0.5 rounded text-[10px] font-bold"
+                    style={{ background: project.accent, color: project.accent === "#fcce00" ? "#000" : "#fff" }}
+                  >
+                    {project.stat} {project.statLabel}
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="text-base font-bold text-white mb-1">{project.title}</h3>
+                  <p className="text-xs text-white/50 line-clamp-2">{project.description}</p>
+                  <div className="flex flex-wrap gap-1 mt-2">
+                    {project.tags.slice(0, 2).map(tag => (
+                      <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-white/10 text-white/50">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Modal>
+  );
+};
+
+/* ── CTA Button (touch‑friendly) ── */
+const CtaButton = ({ onClick }) => {
   const magnetic = useMagnetic(0.25);
+  const [isTouch, setIsTouch] = useState(false);
+  
+  useEffect(() => {
+    setIsTouch(isTouchDevice());
+  }, []);
+
   return (
     <div
-      {...magnetic}
+      {...(isTouch ? {} : magnetic)}
       style={{ transition: "transform 0.3s cubic-bezier(.23,1,.32,1)", display: "inline-block" }}
     >
-      <a
-        href="#contact"
-        className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold text-sm tracking-wide overflow-hidden transition-all duration-300"
-        style={{ border: "1px solid rgba(8,159,241,0.35)", color: "#fff" }}
+      <button
+        onClick={onClick}
+        className="group relative inline-flex items-center gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-sm tracking-wide overflow-hidden transition-all duration-300"
+        style={{ border: "1px solid rgba(8,159,241,0.35)", color: "#fff", background: "transparent" }}
       >
         <span
           className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           style={{ background: "linear-gradient(135deg,#089ff1,#02a1fe)" }}
         />
-        <span className="relative z-10">View All Case Studies</span>
-        <ArrowUpRight
-          size={18}
-          className="relative z-10 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
-        />
-      </a>
+        <span className="relative z-10 text-xs sm:text-sm">View All Case Studies</span>
+        <ArrowUpRight size={16} className="relative z-10 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+      </button>
     </div>
   );
 };
 
-/* ── Main component with unified grid background and updated typography ── */
+/* ── Main Portfolio Component ── */
 const Portfolio = () => {
   const [activeCategory, setActiveCategory] = useState("all");
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [allProjectsModalOpen, setAllProjectsModalOpen] = useState(false);
   const [headerRef, headerVis] = useReveal(0.2);
   const [gridRef, gridVis] = useReveal(0.05);
   const sectionRef = useRef(null);
 
-  // Mouse move handler for the grid glow (same as About/Services)
   useEffect(() => {
     const handleMove = (e) => {
       const section = sectionRef.current;
@@ -385,7 +560,6 @@ const Portfolio = () => {
   }, []);
 
   const filtered = activeCategory === "all" ? projects : projects.filter((p) => p.category === activeCategory);
-
   const stats = [
     { value: "120", suffix: "+", label: "Projects Done" },
     { value: "98", suffix: "%", label: "Happy Clients" },
@@ -393,26 +567,33 @@ const Portfolio = () => {
     { value: "7", suffix: "yr", label: "Experience" },
   ];
 
+  const handleOpenProjectDetail = (project) => setSelectedProject(project);
+  const handleOpenAllProjects = () => setAllProjectsModalOpen(true);
+  const handleSelectProjectFromAll = (project) => setSelectedProject(project);
+
   return (
     <section
       id="portfolio-premium"
       ref={sectionRef}
-      className="section-grid-bg relative py-24 md:py-32 overflow-hidden"
+      className="relative py-24 md:py-32 overflow-hidden"
+      style={{
+        background: "radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(8,159,241,0.08) 0%, rgba(0,0,0,0) 70%)",
+      }}
     >
-      {/* Grid fade mask (required for the edge fade effect) */}
-      <div className="grid-fade-mask" />
-
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 relative z-10">
-        {/* ── Header with updated typography (matches About) ── */}
         <div
           ref={headerRef}
-          className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-700 ${headerVis ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+          className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-700 ${
+            headerVis ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
         >
-          {/* Eyebrow label */}
           <div className="inline-flex items-center gap-2 mb-5">
             <div className="relative">
               <div className="w-2 h-2 rounded-full bg-[#089ff1]" />
-              <div className="absolute inset-0 rounded-full bg-[#089ff1]" style={{ animation: "pulse-ring 1.8s ease-out infinite" }} />
+              <div
+                className="absolute inset-0 rounded-full bg-[#089ff1]"
+                style={{ animation: "pulse-ring 1.8s ease-out infinite" }}
+              />
             </div>
             <span
               style={{
@@ -428,8 +609,6 @@ const Portfolio = () => {
               Our Work
             </span>
           </div>
-
-          {/* Main heading */}
           <h2
             style={{
               fontSize: "clamp(2rem, 5vw, 3.4rem)",
@@ -449,11 +628,8 @@ const Portfolio = () => {
             >
               projects
             </span>{" "}
-            that{" "}
-            <span style={{ color: "#fcce00" }}>inspire</span>
+            that <span style={{ color: "#fcce00" }}>inspire</span>
           </h2>
-
-          {/* Description paragraph */}
           <p
             style={{
               color: "rgba(255, 255, 255, 0.65)",
@@ -467,9 +643,10 @@ const Portfolio = () => {
           </p>
         </div>
 
-        {/* ── Stats bar ── */}
         <div
-          className={`grid grid-cols-2 sm:grid-cols-4 gap-4 mb-14 transition-all duration-700 delay-100 ${headerVis ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+          className={`grid grid-cols-2 sm:grid-cols-4 gap-4 mb-14 transition-all duration-700 delay-100 ${
+            headerVis ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
         >
           {stats.map((s, i) => (
             <div
@@ -485,8 +662,11 @@ const Portfolio = () => {
           ))}
         </div>
 
-        {/* ── Filters ── */}
-        <div className={`flex flex-wrap justify-center gap-3 mb-12 transition-all duration-700 delay-150 ${headerVis ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+        <div
+          className={`flex flex-wrap justify-center gap-3 mb-12 transition-all duration-700 delay-150 ${
+            headerVis ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
           {categories.map((cat) => (
             <FilterBtn
               key={cat.value}
@@ -497,26 +677,57 @@ const Portfolio = () => {
           ))}
         </div>
 
-        {/* ── Grid ── */}
         <div ref={gridRef}>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
             {filtered.map((project, idx) => (
-              <TiltCard key={project.id} project={project} idx={idx} visible={gridVis} />
+              <ProjectCard key={project.id} project={project} idx={idx} visible={gridVis} onClick={handleOpenProjectDetail} />
             ))}
           </div>
         </div>
 
-        {/* ── CTA ── */}
-        <div className={`flex justify-center mt-14 transition-all duration-700 delay-300 ${gridVis ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
-          <CtaButton />
+        <div
+          className={`flex justify-center mt-14 transition-all duration-700 delay-300 ${
+            gridVis ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
+          <CtaButton onClick={handleOpenAllProjects} />
         </div>
       </div>
 
-      {/* Re‑add the pulse‑ring animation (already used above) */}
+      <ProjectDetailModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+      {allProjectsModalOpen && (
+        <AllProjectsModal
+          projects={projects}
+          onClose={() => setAllProjectsModalOpen(false)}
+          onSelectProject={handleSelectProjectFromAll}
+        />
+      )}
+
       <style>{`
         @keyframes pulse-ring {
           0% { transform: scale(1); opacity: 0.6; }
           100% { transform: scale(1.8); opacity: 0; }
+        }
+        .line-clamp-2 {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+        /* Custom scrollbar for modal */
+        .overflow-y-auto::-webkit-scrollbar {
+          width: 6px;
+        }
+        .overflow-y-auto::-webkit-scrollbar-track {
+          background: rgba(255,255,255,0.05);
+          border-radius: 10px;
+        }
+        .overflow-y-auto::-webkit-scrollbar-thumb {
+          background: rgba(8,159,241,0.5);
+          border-radius: 10px;
+        }
+        .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+          background: rgba(8,159,241,0.8);
         }
       `}</style>
     </section>
