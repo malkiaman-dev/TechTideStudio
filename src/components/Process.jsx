@@ -368,13 +368,23 @@ const TrustPill = ({ color, label }) => {
   );
 };
 
-/* ── Main Process component with unified grid background and updated typography ── */
+/* ── Main Process component ── */
 const Process = () => {
   const [headerRef, headerVis] = useReveal(0.2);
   const [stepsRef, stepsVis] = useReveal(0.1);
   const sectionRef = useRef(null);
 
-  // Mouse move handler for grid glow (same as About/Services)
+  // Trust pills data – full set for desktop, first 4 for mobile
+  const allTrustPills = [
+    { color: "#089ff1", label: "Agile methodology" },
+    { color: "#fcce00", label: "Weekly updates" },
+    { color: "#02a1fe", label: "Dedicated support" },
+    { color: "#089ff1", label: "NDA on request" },
+    { color: "#fcce00", label: "Fixed-price options" },
+  ];
+  const mobileTrustPills = allTrustPills.slice(0, 4); // only first 4 on mobile
+
+  // Mouse move handler for grid glow
   useEffect(() => {
     const handleMove = (e) => {
       const section = sectionRef.current;
@@ -400,12 +410,11 @@ const Process = () => {
       <div className="grid-fade-mask" />
 
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 relative z-10">
-        {/* ── Header with updated typography (matches About/Portfolio) ── */}
+        {/* Header */}
         <div
           ref={headerRef}
           className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-700 ${headerVis ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
         >
-          {/* Eyebrow label */}
           <div className="inline-flex items-center gap-2 mb-5">
             <div className="relative">
               <div className="w-2 h-2 rounded-full bg-[#089ff1]" />
@@ -426,7 +435,6 @@ const Process = () => {
             </span>
           </div>
 
-          {/* Main heading */}
           <h2
             style={{
               fontSize: "clamp(2rem, 5vw, 3.4rem)",
@@ -450,7 +458,6 @@ const Process = () => {
             <span style={{ color: "#fcce00" }}>delivers results</span>
           </h2>
 
-          {/* Description paragraph */}
           <p
             style={{
               color: "rgba(255, 255, 255, 0.65)",
@@ -464,7 +471,7 @@ const Process = () => {
           </p>
         </div>
 
-        {/* ── Desktop grid (with progress line) ── */}
+        {/* Desktop grid (with progress line) */}
         <div
           ref={stepsRef}
           className={`relative hidden lg:block transition-all duration-1000 ${stepsVis ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
@@ -477,26 +484,30 @@ const Process = () => {
           </div>
         </div>
 
-        {/* ── Mobile stepper ── */}
+        {/* Mobile stepper */}
         <div ref={stepsRef}>
           <MobileStepper visible={stepsVis} />
         </div>
 
-        {/* ── Trust pills ── */}
-        <div className={`mt-16 flex flex-wrap justify-center gap-3 transition-all duration-700 delay-500 ${stepsVis ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-          {[
-            { color: "#089ff1", label: "Agile methodology" },
-            { color: "#fcce00", label: "Weekly updates" },
-            { color: "#02a1fe", label: "Dedicated support" },
-            { color: "#089ff1", label: "NDA on request" },
-            { color: "#fcce00", label: "Fixed-price options" },
-          ].map((p) => (
-            <TrustPill key={p.label} {...p} />
-          ))}
+        {/* Trust pills – responsive: 2 columns on mobile (4 pills), flex row on desktop (5 pills) */}
+        <div className={`mt-16 transition-all duration-700 delay-500 ${stepsVis ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+          {/* Mobile: grid with 2 columns, only first 4 pills */}
+          <div className="grid grid-cols-2 gap-3 lg:hidden">
+            {mobileTrustPills.map((pill) => (
+              <div key={pill.label} className="flex justify-center">
+                <TrustPill color={pill.color} label={pill.label} />
+              </div>
+            ))}
+          </div>
+          {/* Desktop: flex wrap with all 5 pills */}
+          <div className="hidden lg:flex flex-wrap justify-center gap-3">
+            {allTrustPills.map((pill) => (
+              <TrustPill key={pill.label} color={pill.color} label={pill.label} />
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Keyframes for animations */}
       <style>{`
         @keyframes floatNum { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-5px)} }
         @keyframes pulse-dot {
