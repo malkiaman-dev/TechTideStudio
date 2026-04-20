@@ -1,0 +1,183 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: "Inter", sans-serif;
+  background: #05070c;
+  color: #ffffff;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+::selection {
+  background: rgba(8, 159, 241, 0.35);
+  color: #ffffff;
+}
+
+.nav-shell {
+  transition:
+    background-color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    backdrop-filter 0.35s ease,
+    transform 0.35s ease;
+}
+
+.nav-shell.is-scrolled {
+  background: rgba(7, 11, 18, 0.72);
+  border-color: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(18px);
+  box-shadow:
+    0 18px 60px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.85),
+    rgba(255, 255, 255, 0.1)
+  );
+}
+
+canvas {
+  display: block;
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #05070c;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* Universal background wrapper for all sections except hero */
+.section-bg {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(8, 159, 241, 0.06), transparent 34%),
+    radial-gradient(circle at 82% 62%, rgba(252, 206, 0, 0.04), transparent 30%),
+    linear-gradient(180deg, #05070d 0%, #040811 45%, #03060c 100%);
+}
+
+.section-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.22;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index: 0;
+}
+
+.section-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.01) 0%,
+      transparent 12%,
+      transparent 88%,
+      rgba(255, 255, 255, 0.01) 100%
+    );
+}
+
+.section-bg > * {
+  position: relative;
+  z-index: 1;
+}
+
+.section-transparent {
+  background: transparent !important;
+}
+
+/* ===== REUSABLE GRID BACKGROUND (matches Services / About) ===== */
+.section-grid-bg {
+  position: relative;
+  isolation: isolate;
+  background: transparent; /* preserve existing background, only adds grid */
+}
+
+.section-grid-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  /* 40px grid with cyan tint – exactly as in Services/About */
+  background-image: 
+    repeating-linear-gradient(transparent, transparent 39px, rgba(8, 159, 241, 0.08) 39px, rgba(8, 159, 241, 0.08) 40px),
+    repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(8, 159, 241, 0.08) 39px, rgba(8, 159, 241, 0.08) 40px);
+  background-size: 40px 40px;
+  opacity: 0.35;
+}
+
+/* Mouse‑following glow (adds interactivity) */
+.section-grid-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(8, 159, 241, 0.15), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+/* Optional: enable glow on hover over the whole section */
+.section-grid-bg:hover::after {
+  opacity: 1;
+}
+
+/* Radial fade to soften edges (matches Services/About) */
+.grid-fade-mask {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(circle at 50% 30%, transparent 40%, rgba(0, 0, 0, 0.6) 90%);
+}
+
+/* Ensure content sits above the grid */
+.section-grid-bg > * {
+  position: relative;
+  z-index: 1;
+}
