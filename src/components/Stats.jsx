@@ -4,7 +4,7 @@ import { Trophy, Users, Zap, Award, Globe2, Clock } from "lucide-react";
 const statsData = [
   {
     icon: Trophy,
-    value: 60,
+    value: 150,
     suffix: "+",
     label: "Projects Completed",
     description: "Websites, branding, and marketing work delivered",

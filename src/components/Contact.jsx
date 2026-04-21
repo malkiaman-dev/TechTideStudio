@@ -324,9 +324,9 @@ export default function Contact() {
           ref={cardsRef}
           style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 14, marginBottom: 20 }}
         >
-          <InfoCard Icon={IconMail} label="Email" value="hello@techtidestudio.com" sub="We reply within 24 hours" href="mailto:hello@techtidestudio.com" accent="#089ff1" delay={0} visible={cardsVis} />
-          <InfoCard Icon={IconPhone} label="Phone" value="+1 (234) 567-890" sub="Mon–Fri, 9 am – 6 pm EST" href="tel:+1234567890" accent="#fcce00" delay={90} visible={cardsVis} />
-          <InfoCard Icon={IconPin} label="Location" value="123 Digital Avenue" sub="Suite 100, New York, NY 10001" href="https://maps.google.com" accent="#02a1fe" delay={180} visible={cardsVis} />
+          <InfoCard Icon={IconMail} label="Email" value="info@techtidestudio.com" sub="We reply within 24 hours" href="mailto:info@techtidestudio.com" accent="#089ff1" delay={0} visible={cardsVis} />
+          <InfoCard Icon={IconPhone} label="Phone" value="682-421-1029" sub="Mon–Fri, 9 am – 6 pm EST" href="tel:682-421-1029" accent="#fcce00" delay={90} visible={cardsVis} />
+          <InfoCard Icon={IconPin} label="Location" value="750 S Main St, Suite 150-61, Keller Texas 76248" sub="Suite 150-61, Keller Texas 76248" href="https://maps.google.com" accent="#02a1fe" delay={180} visible={cardsVis} />
         </div>
 
         {/* ── FORM + SIDEBAR ── */}
@@ -399,7 +399,7 @@ export default function Contact() {
             <div style={{ flex: "1 1 auto", minHeight: 240, borderRadius: 24, overflow: "hidden", border: "1px solid rgba(255,255,255,0.08)", position: "relative" }}>
               <iframe
                 title="Studio location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.2219901290355!2d-74.00369368400567!3d40.71312937933085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a23e7803167%3A0x4a01c8df6fb3cb8!2sNew%20York%2C%20NY%2010001!5e0!3m2!1sen!2sus!4v1699999999999!5m2!1sen!2sus"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2068.7401062411473!2d-97.25502102760495!3d32.92325079066514!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864dd77a9965b18f%3A0x23f495c89584625b!2s750%20S%20Main%20St%20150%2061%2C%20Keller%2C%20TX%2076248%2C%20USA!5e0!3m2!1sen!2s!4v1776802880996!5m2!1sen!2s"
                 width="100%" height="100%"
                 style={{ position: "absolute", inset: 0, border: 0, filter: "invert(0.88) hue-rotate(190deg) saturate(0.65) brightness(0.82)" }}
                 allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"

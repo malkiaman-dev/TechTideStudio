@@ -3,13 +3,12 @@ import {
   Mail,
   Send,
   ArrowRight,
-  Twitter,
-  Linkedin,
-  Github,
   Instagram,
+  Facebook,
   MapPin,
   Phone,
 } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import logo from "../assets/techtide-logo.png";
 
 const Footer = () => {
@@ -45,10 +44,26 @@ const Footer = () => {
   ];
 
   const socialIcons = [
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Github, href: "#", label: "GitHub" },
-    { icon: Instagram, href: "#", label: "Instagram" },
+    {
+      icon: Instagram,
+      href: "https://ig.me/1MLDilgEfsBZbqZ",
+      label: "Instagram",
+    },
+    {
+      icon: Facebook,
+      href: "https://www.facebook.com/profile.php?id=61578804895660",
+      label: "Facebook",
+    },
+    {
+      icon: FaWhatsapp,
+      href: "https://wa.me/16824211029",
+      label: "WhatsApp",
+    },
+    {
+      icon: Mail,
+      href: "mailto:info@techtidestudio.com",
+      label: "Email",
+    },
   ];
 
   return (
@@ -67,11 +82,13 @@ const Footer = () => {
                 className="h-8 w-auto rounded-md object-contain"
               />
             </div>
+
             <p className="text-white/60 text-sm leading-relaxed">
               Premium digital agency crafting exceptional web experiences,
-              creative design, and data‑driven marketing solutions for brands
+              creative design, and data-driven marketing solutions for brands
               that demand excellence.
             </p>
+
             <div className="flex gap-3 pt-2">
               {socialIcons.map((social) => {
                 const Icon = social.icon;
@@ -91,10 +108,12 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Row 2: Two columns – Quick Links and Services */}
+          {/* Row 2: Two columns, Quick Links and Services */}
           <div className="grid grid-cols-2 gap-6">
             <div>
-              <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
+              <h3 className="text-lg font-semibold text-white mb-4">
+                Quick Links
+              </h3>
               <ul className="space-y-2">
                 {quickLinks.map((link) => (
                   <li key={link.name}>
@@ -102,7 +121,10 @@ const Footer = () => {
                       href={link.href}
                       className="text-white/60 hover:text-[#089ff1] text-sm transition-colors flex items-center gap-1 group"
                     >
-                      <ArrowRight size={12} className="opacity-0 group-hover:opacity-100 transition-all -ml-4 group-hover:ml-0" />
+                      <ArrowRight
+                        size={12}
+                        className="opacity-0 group-hover:opacity-100 transition-all -ml-4 group-hover:ml-0"
+                      />
                       <span className="group-hover:translate-x-1 transition-transform">
                         {link.name}
                       </span>
@@ -111,8 +133,11 @@ const Footer = () => {
                 ))}
               </ul>
             </div>
+
             <div>
-              <h3 className="text-lg font-semibold text-white mb-4">Services</h3>
+              <h3 className="text-lg font-semibold text-white mb-4">
+                Services
+              </h3>
               <ul className="space-y-2">
                 {servicesList.map((service) => (
                   <li key={service}>
@@ -128,16 +153,22 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Row 3: Newsletter (full width) */}
+          {/* Row 3: Newsletter */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Newsletter</h3>
+            <h3 className="text-lg font-semibold text-white mb-4">
+              Newsletter
+            </h3>
             <p className="text-white/60 text-sm mb-4">
               Subscribe to get the latest insights, case studies, and exclusive
               offers delivered to your inbox.
             </p>
+
             <form onSubmit={handleNewsletter} className="space-y-3">
               <div className="relative">
-                <Mail size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" />
+                <Mail
+                  size={18}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40"
+                />
                 <input
                   type="email"
                   value={email}
@@ -147,6 +178,7 @@ const Footer = () => {
                   className="w-full bg-white/10 border border-white/10 rounded-lg pl-10 pr-4 py-2.5 text-white placeholder-white/30 focus:outline-none focus:border-[#089ff1] transition-colors text-sm"
                 />
               </div>
+
               <button
                 type="submit"
                 className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-[#089ff1] to-[#02a1fe] text-black font-semibold text-sm transition-all duration-300 hover:scale-[1.02]"
@@ -154,6 +186,7 @@ const Footer = () => {
                 Subscribe
                 <Send size={14} />
               </button>
+
               {subscribed && (
                 <p className="text-green-400 text-xs text-center">
                   Thanks for subscribing!
@@ -174,11 +207,13 @@ const Footer = () => {
                 className="h-8 w-auto rounded-md object-contain"
               />
             </div>
+
             <p className="text-white/60 text-sm leading-relaxed">
               Premium digital agency crafting exceptional web experiences,
-              creative design, and data‑driven marketing solutions for brands
+              creative design, and data-driven marketing solutions for brands
               that demand excellence.
             </p>
+
             <div className="flex gap-3 pt-2">
               {socialIcons.map((social) => {
                 const Icon = social.icon;
@@ -200,7 +235,9 @@ const Footer = () => {
 
           {/* Column 2: Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-5">Quick Links</h3>
+            <h3 className="text-lg font-semibold text-white mb-5">
+              Quick Links
+            </h3>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.name}>
@@ -208,7 +245,10 @@ const Footer = () => {
                     href={link.href}
                     className="text-white/60 hover:text-[#089ff1] text-sm transition-colors flex items-center gap-1 group"
                   >
-                    <ArrowRight size={12} className="opacity-0 group-hover:opacity-100 transition-all -ml-4 group-hover:ml-0" />
+                    <ArrowRight
+                      size={12}
+                      className="opacity-0 group-hover:opacity-100 transition-all -ml-4 group-hover:ml-0"
+                    />
                     <span className="group-hover:translate-x-1 transition-transform">
                       {link.name}
                     </span>
@@ -237,14 +277,20 @@ const Footer = () => {
 
           {/* Column 4: Newsletter */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-5">Newsletter</h3>
+            <h3 className="text-lg font-semibold text-white mb-5">
+              Newsletter
+            </h3>
             <p className="text-white/60 text-sm mb-4">
               Subscribe to get the latest insights, case studies, and exclusive
               offers delivered to your inbox.
             </p>
+
             <form onSubmit={handleNewsletter} className="space-y-3">
               <div className="relative">
-                <Mail size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" />
+                <Mail
+                  size={18}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40"
+                />
                 <input
                   type="email"
                   value={email}
@@ -254,6 +300,7 @@ const Footer = () => {
                   className="w-full bg-white/10 border border-white/10 rounded-lg pl-10 pr-4 py-2.5 text-white placeholder-white/30 focus:outline-none focus:border-[#089ff1] transition-colors text-sm"
                 />
               </div>
+
               <button
                 type="submit"
                 className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-[#089ff1] to-[#02a1fe] text-black font-semibold text-sm transition-all duration-300 hover:scale-[1.02]"
@@ -261,6 +308,7 @@ const Footer = () => {
                 Subscribe
                 <Send size={14} />
               </button>
+
               {subscribed && (
                 <p className="text-green-400 text-xs text-center">
                   Thanks for subscribing!
@@ -270,22 +318,31 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom bar (unchanged) */}
+        {/* Bottom bar */}
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-white/40 text-xs">
           <div className="flex flex-wrap justify-center gap-4">
             <span>© 2024 TechTide Studio. All rights reserved.</span>
             <span className="hidden md:inline">|</span>
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+            <a href="#" className="hover:text-white transition-colors">
+              Privacy Policy
+            </a>
+            <a href="#" className="hover:text-white transition-colors">
+              Terms of Service
+            </a>
           </div>
-          <div className="flex items-center gap-3">
+
+          <div className="flex items-center gap-3 flex-wrap justify-center">
             <div className="flex items-center gap-1">
               <MapPin size={12} />
               <span>New York, NY</span>
             </div>
             <div className="flex items-center gap-1">
               <Phone size={12} />
-              <span>+1 (234) 567-890</span>
+              <span>+1 (682) 421-1029</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <Mail size={12} />
+              <span>info@techtidestudio.com</span>
             </div>
           </div>
         </div>
