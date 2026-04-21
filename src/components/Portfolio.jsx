@@ -15,111 +15,129 @@ import { createPortal } from "react-dom";
 const projects = [
   {
     id: 1,
-    title: "FinTech Dashboard",
+    title: "Corporate Business Website",
     category: "web",
     categoryName: "Web Development",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=700&h=500&fit=crop",
-    description: "Interactive dashboard for real-time financial analytics with AI-powered insights.",
-    longDescription: "A cutting-edge financial analytics platform that processes millions of transactions in real-time. The dashboard provides institutional investors with AI-driven market predictions, risk assessment tools, and portfolio optimization algorithms. Built with React and D3.js, it delivers 60fps visualizations even with large datasets.",
-    challenge: "Existing solutions were slow and lacked predictive capabilities. Clients needed real-time data processing with intuitive visualizations.",
-    outcome: "3.2x faster data processing, 40% increase in user engagement, and won 'Best FinTech Innovation' award.",
-    tags: ["React", "D3.js", "Tailwind"],
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&h=500&fit=crop",
+    description: "Modern corporate website built to strengthen credibility and generate quality leads.",
+    longDescription:
+      "A complete business website designed for a service-based company looking to establish a stronger online presence. The project focused on premium visuals, responsive layouts, clear call-to-actions, and a smooth user experience across devices.",
+    challenge:
+      "The client had no strong digital presence and needed a professional website that could clearly present services, build trust, and encourage inquiries.",
+    outcome:
+      "Improved brand presentation, stronger lead generation, and a significantly more professional online presence.",
+    tags: ["React", "Responsive", "Business Website"],
     accent: "#089ff1",
-    stat: "3.2x",
-    statLabel: "Performance",
-    client: "Vanguard Group",
+    stat: "Responsive",
+    statLabel: "Across Devices",
+    client: "Corporate Client",
     year: "2024",
-    technologies: ["React 18", "D3.js", "Node.js", "WebSockets", "Tailwind CSS"]
+    technologies: ["React", "Tailwind CSS", "Vite", "JavaScript"]
   },
   {
     id: 2,
-    title: "Luxury Brand Identity",
-    category: "design",
-    categoryName: "Graphic Design",
-    image: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=700&h=500&fit=crop",
-    description: "Complete brand identity including logo, stationery, and comprehensive guidelines.",
-    longDescription: "A complete rebranding for a high-end watchmaker, including logo design, color palette, typography system, packaging, and digital assets. The identity reflects precision craftsmanship and timeless elegance.",
-    challenge: "The brand needed to differentiate from competitors while maintaining heritage appeal. Consistency across print, digital, and product packaging was critical.",
-    outcome: "12 deliverables produced, brand recognition increased by 65%, featured in 'Brand Identity 2024' publication.",
-    tags: ["Logo", "Typography", "Branding"],
-    accent: "#fcce00",
-    stat: "12",
-    statLabel: "Deliverables",
-    client: "Horologe Suisse",
-    year: "2023",
-    technologies: ["Adobe Illustrator", "Photoshop", "Figma", "InDesign"]
+    title: "E-commerce Storefront",
+    category: "web",
+    categoryName: "Web Development",
+    image: "https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=700&h=500&fit=crop",
+    description: "A conversion-focused online store built for product visibility and smooth shopping experience.",
+    longDescription:
+      "A modern e-commerce storefront created for a growing retail business. The website was designed to make browsing, product discovery, and checkout simpler while presenting the brand in a clean and professional way.",
+    challenge:
+      "The business needed a store that looked trustworthy, loaded well on mobile, and made it easier for customers to explore products and place orders.",
+    outcome:
+      "Better product presentation, smoother user flow, and stronger customer confidence in the brand online.",
+    tags: ["E-commerce", "UI", "Performance"],
+    accent: "#02a1fe",
+    stat: "Mobile",
+    statLabel: "Optimized",
+    client: "Retail Brand",
+    year: "2024",
+    technologies: ["React", "Tailwind CSS", "Product UI", "Responsive Design"]
   },
   {
     id: 3,
-    title: "E-commerce Growth",
-    category: "marketing",
-    categoryName: "Digital Marketing",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&h=500&fit=crop",
-    description: "SEO + PPC campaign that increased revenue by 240% in six months.",
-    longDescription: "A comprehensive digital marketing strategy for a D2C sustainable fashion brand. The campaign combined technical SEO overhaul, targeted Google Shopping campaigns, and TikTok influencer partnerships.",
-    challenge: "High competition in sustainable fashion space with limited budget. Needed to achieve ROI positive within first quarter.",
-    outcome: "240% revenue increase, 180% ROAS, #1 ranking for 12 target keywords, and 45% reduction in CAC.",
-    tags: ["SEO", "PPC", "Analytics"],
-    accent: "#02a1fe",
-    stat: "240%",
-    statLabel: "Revenue Uplift",
-    client: "EcoWear Collective",
-    year: "2024",
-    technologies: ["Google Analytics 4", "Semrush", "Meta Ads", "Shopify"]
+    title: "Luxury Brand Identity",
+    category: "design",
+    categoryName: "Logo Design",
+    image: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=700&h=500&fit=crop",
+    description: "Professional logo and brand identity crafted for a premium business image.",
+    longDescription:
+      "A complete branding project focused on logo design, typography direction, color styling, and visual consistency. The identity was designed to make the business look established, memorable, and visually refined across digital and print use.",
+    challenge:
+      "The client needed a logo and identity that felt premium, trustworthy, and flexible enough to work across multiple platforms.",
+    outcome:
+      "A stronger visual identity, improved brand recognition, and a more polished business presentation.",
+    tags: ["Logo", "Brand Identity", "Typography"],
+    accent: "#fcce00",
+    stat: "Complete",
+    statLabel: "Brand System",
+    client: "Luxury Brand",
+    year: "2023",
+    technologies: ["Adobe Illustrator", "Photoshop", "Brand Guidelines"]
   },
   {
     id: 4,
-    title: "Healthcare App UI/UX",
-    category: "web",
-    categoryName: "Web Development",
-    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=700&h=500&fit=crop",
-    description: "Patient-centric mobile app with appointment scheduling and telehealth.",
-    longDescription: "A HIPAA-compliant mobile application that connects patients with healthcare providers. Features include video consultations, prescription management, lab results, and secure messaging.",
-    challenge: "Complex medical workflows needed simplification for elderly users while maintaining clinical accuracy and data security.",
-    outcome: "4.9★ app store rating, 78% reduction in no-show appointments, and 120K+ downloads in first 3 months.",
-    tags: ["Figma", "Prototype", "Usability"],
-    accent: "#089ff1",
-    stat: "4.9★",
-    statLabel: "App Rating",
-    client: "HealthFirst Network",
-    year: "2023",
-    technologies: ["Figma", "React Native", "Firebase", "Twilio"]
+    title: "Restaurant Branding Kit",
+    category: "design",
+    categoryName: "Logo Design",
+    image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=700&h=500&fit=crop",
+    description: "A branding package including logo, menu styling, and visual assets for a local food business.",
+    longDescription:
+      "This project focused on creating a cohesive identity for a restaurant brand through logo refinement, menu visuals, color direction, and promotional design elements that could be used both online and offline.",
+    challenge:
+      "The brand lacked consistency and needed a stronger identity that customers could recognize easily.",
+    outcome:
+      "Improved visual consistency, more professional brand presentation, and stronger marketing readiness.",
+    tags: ["Logo", "Branding", "Print Assets"],
+    accent: "#fcce00",
+    stat: "Ready",
+    statLabel: "For Promotion",
+    client: "Restaurant Client",
+    year: "2024",
+    technologies: ["Adobe Illustrator", "Photoshop", "Brand Assets"]
   },
   {
     id: 5,
-    title: "Restaurant Packaging",
-    category: "design",
-    categoryName: "Graphic Design",
-    image: "https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=700&h=500&fit=crop",
-    description: "Sustainable packaging that tells a brand story through illustration and print.",
-    longDescription: "Eco-friendly packaging system for a farm-to-table restaurant chain. The design uses soy-based inks, recycled materials, and hand-drawn illustrations that tell the story of local farming partnerships.",
-    challenge: "Creating a premium unboxing experience while maintaining compostable materials and cost efficiency.",
-    outcome: "8 SKUs designed, 32% increase in social media unboxing shares, won 'Sustainable Design Award 2024'.",
-    tags: ["Packaging", "Illustration", "Print"],
-    accent: "#fcce00",
-    stat: "8",
-    statLabel: "SKUs Designed",
-    client: "Harvest Table",
+    title: "Social Media Growth Campaign",
+    category: "marketing",
+    categoryName: "Social Media Marketing",
+    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=700&h=500&fit=crop",
+    description: "Creative social media campaign designed to improve reach, consistency, and audience engagement.",
+    longDescription:
+      "A focused social media marketing project that included branded post design, content direction, posting strategy, and audience-focused creatives to help the business stay visible and active online.",
+    challenge:
+      "The client needed a more professional social media presence and consistent content that aligned with their brand image.",
+    outcome:
+      "Improved engagement, stronger visual consistency, and better audience interaction across social platforms.",
+    tags: ["Content Strategy", "Social Media", "Brand Reach"],
+    accent: "#089ff1",
+    stat: "Higher",
+    statLabel: "Engagement",
+    client: "Local Business",
     year: "2024",
-    technologies: ["Adobe Illustrator", "Procreate", "Packaging mockup tools"]
+    technologies: ["Content Planning", "Creative Design", "Campaign Strategy"]
   },
   {
     id: 6,
-    title: "SaaS Product Launch",
+    title: "SEO Visibility Campaign",
     category: "marketing",
-    categoryName: "Digital Marketing",
-    image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=700&h=500&fit=crop",
-    description: "Multi-channel launch strategy with email automation and social media ads.",
-    longDescription: "Go-to-market strategy for a B2B project management SaaS. The launch included a 6-week pre-launch campaign, beta program, influencer partnerships, and post-launch retention automation.",
-    challenge: "Competing against established players like Asana and Monday.com. Required a differentiated positioning and aggressive user acquisition.",
-    outcome: "18K users on day one, 4.2x ROI in first month, and featured in 'Product Hunt' #2 product of the week.",
-    tags: ["Email", "Social Ads", "Automation"],
+    categoryName: "SEO",
+    image: "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=700&h=500&fit=crop",
+    description: "SEO project focused on improving search visibility and helping customers discover the business online.",
+    longDescription:
+      "An SEO-focused growth project built around keyword targeting, on-page optimization, content improvements, and search visibility strategy to help the client appear more effectively in relevant searches.",
+    challenge:
+      "The business had limited visibility in search results and needed a stronger organic presence to attract qualified visitors.",
+    outcome:
+      "Better search visibility, stronger keyword presence, and a more discoverable online brand.",
+    tags: ["SEO", "Keywords", "Organic Growth"],
     accent: "#02a1fe",
-    stat: "18K",
-    statLabel: "Users Day 1",
-    client: "TaskFlow AI",
+    stat: "Better",
+    statLabel: "Search Presence",
+    client: "Service Business",
     year: "2024",
-    technologies: ["HubSpot", "LinkedIn Ads", "Google Ads", "Zapier"]
+    technologies: ["SEO Audit", "Keyword Research", "On-Page SEO", "Analytics"]
   }
 ];
 
@@ -214,46 +232,49 @@ const Counter = ({ value, suffix = "" }) => {
   );
 };
 
+// ============================================
+// FIXED BODY SCROLL LOCK – no position: fixed
+// ============================================
 const useBodyScrollLock = (locked) => {
   useEffect(() => {
     if (!locked) return;
 
-    const scrollY = window.scrollY || window.pageYOffset;
-    const originalStyle = {
-      overflow: document.body.style.overflow,
-      position: document.body.style.position,
-      top: document.body.style.top,
-      width: document.body.style.width,
-      left: document.body.style.left,
-      right: document.body.style.right,
-    };
+    const originalOverflow = document.body.style.overflow;
+    const originalHtmlOverflow = document.documentElement.style.overflow;
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
 
-    document.body.style.overflow = "hidden";
-    document.body.style.position = "fixed";
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.left = "0";
-    document.body.style.right = "0";
-    document.body.style.width = "100%";
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    }
 
     return () => {
-      document.body.style.overflow = originalStyle.overflow;
-      document.body.style.position = originalStyle.position;
-      document.body.style.top = originalStyle.top;
-      document.body.style.width = originalStyle.width;
-      document.body.style.left = originalStyle.left;
-      document.body.style.right = originalStyle.right;
-      window.scrollTo(0, scrollY);
+      document.body.style.overflow = originalOverflow;
+      document.documentElement.style.overflow = originalHtmlOverflow;
+      document.body.style.paddingRight = '';
     };
   }, [locked]);
 };
 
 const ProjectCard = ({ project, idx, visible, onOpen }) => {
   const [hovered, setHovered] = useState(false);
+  const buttonRef = useRef(null);
+
+  const handleClick = () => {
+    if (buttonRef.current) {
+      onOpen(project, buttonRef.current);
+    } else {
+      onOpen(project, null);
+    }
+  };
 
   return (
     <button
       type="button"
-      onClick={() => onOpen(project)}
+      ref={buttonRef}
+      onClick={handleClick}
       className={`group relative rounded-2xl overflow-hidden text-left w-full transition-all duration-700 ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       }`}
@@ -556,9 +577,9 @@ const AllProjectsModal = ({ projects, onClose, onSelectProject }) => {
               project={project}
               idx={idx}
               visible={true}
-              onOpen={(selected) => {
+              onOpen={(proj) => {
                 onClose();
-                setTimeout(() => onSelectProject(selected), 140);
+                setTimeout(() => onSelectProject(proj), 140);
               }}
             />
           ))}
@@ -586,7 +607,7 @@ const CtaButton = ({ onClick }) => {
           className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           style={{ background: "linear-gradient(135deg,#089ff1,#02a1fe)" }}
         />
-        <span className="relative z-10">View All Case Studies</span>
+        <span className="relative z-10">Explore All Projects</span>
         <ArrowUpRight
           size={18}
           className="relative z-10 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
@@ -600,10 +621,26 @@ const Portfolio = () => {
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedProject, setSelectedProject] = useState(null);
   const [allProjectsModalOpen, setAllProjectsModalOpen] = useState(false);
+  const [scrollTargetY, setScrollTargetY] = useState(null);
   const [headerRef, headerVis] = useReveal(0.2);
   const [gridRef, gridVis] = useReveal(0.05);
   const sectionRef = useRef(null);
 
+  // Auto-scroll back to card after modal closes (mobile only)
+  useEffect(() => {
+    if (selectedProject === null && scrollTargetY !== null) {
+      const timeout = setTimeout(() => {
+        window.scrollTo({
+          top: scrollTargetY,
+          behavior: "smooth",
+        });
+        setScrollTargetY(null);
+      }, 150);
+      return () => clearTimeout(timeout);
+    }
+  }, [selectedProject, scrollTargetY]);
+
+  // Mouse move glow (desktop only)
   useEffect(() => {
     if (isTouchDevice()) return;
 
@@ -622,15 +659,29 @@ const Portfolio = () => {
     return () => window.removeEventListener("mousemove", handleMove);
   }, []);
 
-  const filtered =
-    activeCategory === "all" ? projects : projects.filter((p) => p.category === activeCategory);
-
-  const stats = [
-    { value: "120", suffix: "+", label: "Projects Done" },
-    { value: "98", suffix: "%", label: "Happy Clients" },
-    { value: "12", suffix: "", label: "Awards Won" },
-    { value: "7", suffix: "yr", label: "Experience" },
+  const filtered = activeCategory === "all" ? projects : projects.filter((p) => p.category === activeCategory);
+  
+  // ============================================
+  // REPLACED STATS SECTION with portfolio‑focused metrics
+  // ============================================
+  const portfolioMetrics = [
+    { value: "99", suffix: "%", label: "Success Rate" },
+    { value: "10", suffix: "+", label: "Brands Trusted" },
+    { value: "100", suffix: "%", label: "Client Satisfaction" },
+    { value: "98", suffix: "%", label: "On‑Time Delivery" },
   ];
+
+  const handleOpenProject = (project, element) => {
+    if (element) {
+      const y = element.getBoundingClientRect().top + window.scrollY;
+      setScrollTargetY(y);
+    }
+    setSelectedProject(project);
+  };
+
+  const handleOpenProjectFromAllModal = (project) => {
+    setSelectedProject(project);
+  };
 
   return (
     <section
@@ -682,7 +733,7 @@ const Portfolio = () => {
               color: "#ffffff",
             }}
           >
-            Recent{" "}
+            Projects{" "}
             <span
               style={{
                 background: "linear-gradient(90deg, #089ff1, #02a1fe)",
@@ -690,9 +741,9 @@ const Portfolio = () => {
                 WebkitTextFillColor: "transparent",
               }}
             >
-              projects
+              built
             </span>{" "}
-            that <span style={{ color: "#fcce00" }}>inspire</span>
+            that <span style={{ color: "#fcce00" }}>for growth</span>
           </h2>
 
           <p
@@ -704,25 +755,26 @@ const Portfolio = () => {
               margin: "0 auto",
             }}
           >
-            A curated selection of our finest work — from web platforms to visual identities and growth campaigns.
+            Explore some of our recent work across websites, logo design, social media marketing, and SEO, each crafted to help businesses stand out and perform better online.
           </p>
         </div>
 
+        {/* REPLACED STATS SECTION */}
         <div
           className={`grid grid-cols-2 sm:grid-cols-4 gap-4 mb-14 transition-all duration-700 delay-100 ${
             headerVis ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          {stats.map((s, i) => (
+          {portfolioMetrics.map((metric, i) => (
             <div
               key={i}
               className="text-center rounded-xl p-4 border"
               style={{ background: "rgba(255,255,255,0.02)", borderColor: "rgba(255,255,255,0.06)" }}
             >
               <div className="text-2xl sm:text-3xl font-black text-white mb-1">
-                <Counter value={s.value} suffix={s.suffix} />
+                <Counter value={metric.value} suffix={metric.suffix} />
               </div>
-              <div className="text-xs text-white/40 uppercase tracking-widest font-semibold">{s.label}</div>
+              <div className="text-xs text-white/40 uppercase tracking-widest font-semibold">{metric.label}</div>
             </div>
           ))}
         </div>
@@ -750,7 +802,7 @@ const Portfolio = () => {
                 project={project}
                 idx={idx}
                 visible={gridVis}
-                onOpen={setSelectedProject}
+                onOpen={handleOpenProject}
               />
             ))}
           </div>
@@ -774,7 +826,7 @@ const Portfolio = () => {
         <AllProjectsModal
           projects={projects}
           onClose={() => setAllProjectsModalOpen(false)}
-          onSelectProject={setSelectedProject}
+          onSelectProject={handleOpenProjectFromAllModal}
         />
       )}
 
@@ -783,7 +835,6 @@ const Portfolio = () => {
           0% { transform: scale(1); opacity: 0.6; }
           100% { transform: scale(1.8); opacity: 0; }
         }
-
         .line-clamp-2 {
           display: -webkit-box;
           -webkit-line-clamp: 2;

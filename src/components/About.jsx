@@ -10,10 +10,10 @@ const About = () => {
   const stats = [
     {
       id: "projects",
-      target: 150,
+      target: 50,
       suffix: "+",
       label: "Projects Delivered",
-      detail: "Shipped across SaaS, e-commerce, fintech & more",
+      detail: "Every project is designed to strengthen your business identity",
       color: "#089ff1",
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width={28} height={28}>
@@ -71,39 +71,51 @@ const About = () => {
     },
   ];
 
-  const capabilities = [
-    {
-      title: "Web Development",
-      desc: "Scalable, high-performance web applications built for growth.",
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="#089ff1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
-          <polyline points="16 18 22 12 16 6" />
-          <polyline points="8 6 2 12 8 18" />
-        </svg>
-      ),
-    },
-    {
-      title: "UI/UX Design",
-      desc: "User-centered interfaces that delight and convert visitors.",
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="#089ff1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
-          <path d="M12 19l7-7 3 3-7 7-3-3z" />
-          <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
-          <path d="M2 2l7.586 7.586" />
-          <circle cx="11" cy="11" r="2" />
-        </svg>
-      ),
-    },
-    {
-      title: "Digital Marketing",
-      desc: "Data-driven strategies that accelerate sustainable brand growth.",
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="#089ff1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
-          <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-        </svg>
-      ),
-    },
-  ];
+ const capabilities = [
+  {
+    title: "Web Development",
+    desc: "Modern, responsive websites built to represent your business and perform across every screen.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#089ff1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
+        <polyline points="16 18 22 12 16 6" />
+        <polyline points="8 6 2 12 8 18" />
+      </svg>
+    ),
+  },
+  {
+    title: "Logo Design",
+    desc: "Distinctive and professional brand identities that help businesses stand out with confidence.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#089ff1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
+        <circle cx="13.5" cy="6.5" r="2.5" />
+        <circle cx="18.5" cy="11.5" r="2.5" />
+        <circle cx="13.5" cy="17.5" r="2.5" />
+        <circle cx="6.5" cy="13.5" r="2.5" />
+        <path d="M8 21c3 0 5-2 5-5" />
+      </svg>
+    ),
+  },
+  {
+    title: "Social Media Marketing",
+    desc: "Creative and strategic content that helps your brand connect, engage, and grow online.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#089ff1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
+        <path d="M3 11l18-8v18l-18-8z" />
+        <path d="M11 13l3 3" />
+      </svg>
+    ),
+  },
+  {
+    title: "SEO Solutions",
+    desc: "Improve visibility on Google and attract more customers organically.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#089ff1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width={22} height={22}>
+        <circle cx="11" cy="11" r="7" />
+        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      </svg>
+    ),
+  },
+];
 
   // Handle mouse move for grid glow and card effects
   useEffect(() => {
@@ -468,16 +480,15 @@ const About = () => {
             <h2 style={{ fontSize: "clamp(2rem,5vw,3.4rem)", fontWeight: 700, lineHeight: 1.15, color: "#ffffff", margin: "0 0 1rem" }}>
               Where{" "}
               <span style={{ background: "linear-gradient(90deg,#089ff1,#02a1fe)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                innovation
+                Creative
               </span>{" "}
-              meets
+              ideas meet
               <br />
-              <span style={{ color: "#fcce00" }}>execution</span>
+              <span style={{ color: "#fcce00" }}>Digital Growth</span>
             </h2>
 
             <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "1rem", lineHeight: 1.75, maxWidth: 560, margin: "0 auto" }}>
-              TechTide Studio is a premium digital agency fusing art, engineering,
-              and strategy to deliver measurable impact for global brands.
+              At TechTide Studio, we help businesses grow through smart branding, modern websites, social media marketing, and SEO. Our goal is to create digital solutions that not only look professional, but also support real business results.
             </p>
           </div>
 
@@ -558,7 +569,7 @@ const About = () => {
               <h3 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#ffffff", marginBottom: 8 }}>Mission</h3>
 
               <p style={{ fontSize: "0.875rem", lineHeight: 1.75, color: "rgba(255,255,255,0.65)" }}>
-                To empower businesses with cutting-edge digital solutions that combine beautiful design, robust engineering, and strategic marketing, all under one roof.
+                To help businesses build a strong and professional digital presence through logo design, modern websites, social media marketing, and SEO services that support long-term growth.
               </p>
             </div>
 
@@ -573,7 +584,7 @@ const About = () => {
               <h3 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#ffffff", marginBottom: 8 }}>Vision</h3>
 
               <p style={{ fontSize: "0.875rem", lineHeight: 1.75, color: "rgba(255,255,255,0.65)" }}>
-                To become the go-to digital agency for brands that refuse to settle for mediocrity, setting new standards in quality, innovation, and client success.
+                To become a trusted digital growth partner for businesses that want creative branding, stronger online visibility, and practical digital solutions that make a real difference.
               </p>
             </div>
           </div>
@@ -585,7 +596,7 @@ const About = () => {
               </span>
 
               <h3 style={{ fontSize: "clamp(1.5rem,3vw,2.2rem)", fontWeight: 700, color: "#ffffff" }}>
-                What we deliver
+                What we do best
               </h3>
             </div>
 

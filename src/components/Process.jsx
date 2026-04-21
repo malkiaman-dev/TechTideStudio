@@ -6,46 +6,46 @@ const steps = [
     number: "01",
     icon: Search,
     title: "Discovery",
-    description: "We dive deep into your business goals, target audience, and competition to create a tailored strategy.",
-    duration: "1–2 weeks",
+    description:
+      "We understand your business, goals, audience, and current digital presence to plan the right direction for your project.",
     accent: "#089ff1",
-    detail: "Stakeholder interviews, competitor audit, KPI mapping",
+    detail: "Business goals, audience research, project planning",
   },
   {
     number: "02",
     icon: PenTool,
-    title: "Design",
-    description: "Our designers craft wireframes, prototypes, and visual identities that align with your brand.",
-    duration: "2–3 weeks",
+    title: "Planning & Design",
+    description:
+      "We shape the visual direction, content structure, and creative concepts needed to build a strong and professional digital presence.",
     accent: "#fcce00",
-    detail: "Wireframes, style guide, interactive prototype",
+    detail: "Concepts, layout planning, branding direction",
   },
   {
     number: "03",
     icon: Code2,
-    title: "Development",
-    description: "Agile development with regular updates – we build scalable, fast, and secure digital products.",
-    duration: "4–8 weeks",
+    title: "Build",
+    description:
+      "We turn approved ideas into real deliverables, from websites and brand assets to marketing creatives, with careful attention to quality.",
     accent: "#02a1fe",
-    detail: "Sprint reviews, CI/CD pipeline, QA cycles",
+    detail: "Website development, design execution, content setup",
   },
   {
     number: "04",
     icon: Rocket,
     title: "Launch",
-    description: "Rigorous testing, deployment, and a smooth go‑live with post‑launch support.",
-    duration: "1 week",
+    description:
+      "After review and refinement, we deliver and launch your project in a polished, professional, and ready-to-use form.",
     accent: "#089ff1",
-    detail: "Load testing, zero-downtime deploy, live monitoring",
+    detail: "Final revisions, delivery, publishing support",
   },
   {
     number: "05",
     icon: BarChart3,
     title: "Growth",
-    description: "Data‑driven optimisation, marketing, and continuous improvement for long‑term success.",
-    duration: "Ongoing",
+    description:
+      "We continue supporting your business through optimization, social media marketing, SEO improvements, and ongoing digital growth.",
     accent: "#fcce00",
-    detail: "A/B testing, SEO, monthly reporting",
+    detail: "SEO support, marketing improvements, performance tracking",
   },
 ];
 
@@ -376,11 +376,11 @@ const Process = () => {
 
   // Trust pills data – full set for desktop, first 4 for mobile
   const allTrustPills = [
-    { color: "#089ff1", label: "Agile methodology" },
+    { color: "#089ff1", label: "Clear communication" },
     { color: "#fcce00", label: "Weekly updates" },
     { color: "#02a1fe", label: "Dedicated support" },
-    { color: "#089ff1", label: "NDA on request" },
-    { color: "#fcce00", label: "Fixed-price options" },
+    { color: "#089ff1", label: "On-time delivery" },
+    { color: "#fcce00", label: "Flexible pricing" },
   ];
   const mobileTrustPills = allTrustPills.slice(0, 4); // only first 4 on mobile
 
@@ -467,7 +467,7 @@ const Process = () => {
               margin: "0 auto",
             }}
           >
-            From idea to launch and beyond — a proven methodology that keeps you involved and informed at every stage.
+            We follow a clear step-by-step process that keeps your project organized, your goals in focus, and your business involved at every stage.
           </p>
         </div>
 

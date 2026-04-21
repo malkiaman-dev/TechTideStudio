@@ -4,47 +4,51 @@ import { Star, ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 const testimonials = [
   {
     id: 1,
-    name: "Sarah Johnson",
-    role: "CEO, FinTech Solutions",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop",
-    quote: "TechTide Studio transformed our digital presence. Their web development team delivered a platform that increased user engagement by 200%. Exceptional communication and technical expertise.",
+    name: "James Carter",
+    role: "Owner, Carter Consulting",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop",
+    quote:
+      "TechTide Studio built a professional website for my business that completely changed how clients see us online. The process was smooth and the final result exceeded expectations.",
     rating: 5,
     accent: "#089ff1",
-    metric: "+200%",
-    metricLabel: "Engagement",
+    metric: "New",
+    metricLabel: "Website",
   },
   {
     id: 2,
-    name: "Michael Chen",
-    role: "Marketing Director, Luxe Brands",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop",
-    quote: "The UI/UX design and digital marketing strategy from TechTide boosted our conversion rates dramatically. They're not just vendors – they're true partners in growth.",
+    name: "Sophia Martinez",
+    role: "Founder, Bloom Beauty",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop",
+    quote:
+      "The logo and branding they created for my salon perfectly captured the style I wanted. It gave my business a polished and professional identity.",
     rating: 5,
     accent: "#fcce00",
-    metric: "3.8x",
-    metricLabel: "Conversions",
+    metric: "Brand",
+    metricLabel: "Identity",
   },
   {
     id: 3,
-    name: "Emily Rodriguez",
-    role: "Founder, Creative Studio",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop",
-    quote: "Incredible attention to detail and creativity. The branding package they created perfectly captures our essence. Highly recommend for any creative business.",
+    name: "Daniel Kim",
+    role: "Marketing Manager, Urban Style",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop",
+    quote:
+      "Their social media marketing helped our brand stay consistent and reach more people. Engagement improved noticeably within the first few weeks.",
     rating: 5,
     accent: "#02a1fe",
-    metric: "12",
-    metricLabel: "Brand Assets",
+    metric: "Higher",
+    metricLabel: "Engagement",
   },
   {
     id: 4,
-    name: "David Kim",
-    role: "CTO, HealthTech Inc.",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop",
-    quote: "Their video editing and email marketing campaigns helped us launch successfully. Professional, on time, and results-driven. A top‑tier agency.",
+    name: "Emily Thompson",
+    role: "Owner, Thompson Interiors",
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop",
+    quote:
+      "TechTide helped improve our visibility on Google with their SEO work. We started receiving more inquiries through our website within a few months.",
     rating: 5,
     accent: "#089ff1",
-    metric: "18K",
-    metricLabel: "Day-1 Users",
+    metric: "Better",
+    metricLabel: "Visibility",
   },
 ];
 
@@ -431,7 +435,7 @@ const Testimonials = () => {
               color: "#ffffff",
             }}
           >
-            What our{" "}
+            Trusted by{" "}
             <span
               style={{
                 background: "linear-gradient(90deg, #089ff1, #02a1fe)",
@@ -439,9 +443,9 @@ const Testimonials = () => {
                 WebkitTextFillColor: "transparent",
               }}
             >
-              clients
+              businesses
             </span>{" "}
-            say about{" "}
+            we work with{" "}
             <span style={{ color: "#fcce00" }}>us</span>
           </h2>
 
@@ -455,7 +459,7 @@ const Testimonials = () => {
               margin: "0 auto 2rem",
             }}
           >
-            Don't just take our word for it — hear from the brands we've helped grow.
+            DHear from businesses that have worked with TechTide Studio to build stronger brands, better websites, and a more visible online presence.
           </p>
 
           <ViewToggle mode={mode} setMode={setMode} />

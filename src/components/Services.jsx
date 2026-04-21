@@ -7,6 +7,7 @@ import {
   Video,
   Mail,
   Sparkles,
+  Search,
 } from "lucide-react";
 
 const services = [
@@ -14,55 +15,55 @@ const services = [
     icon: Code2,
     title: "Web Development",
     description:
-      "Custom websites, web apps, and e-commerce platforms built for speed, scalability, and seamless user experience.",
-    tags: ["React", "Node.js", "WordPress"],
+      "Modern, responsive websites built to represent your business and perform smoothly across every screen.",
+    tags: ["Responsive", "Business Websites", "Performance"],
     color: "#089ff1",
-    stat: "150+ sites shipped",
+    stat: "25+ sites shipped",
   },
   {
     icon: Palette,
-    title: "Graphic Design",
+    title: "Logo Design",
     description:
-      "Visual identity, branding, print materials, and digital assets that capture attention and communicate your story.",
-    tags: ["Logo", "Branding", "Illustration"],
+      "Distinctive logo designs that give your business a professional identity and a strong first impression.",
+    tags: ["Brand Identity", "Creative Design", "Professional Look"],
     color: "#02a1fe",
-    stat: "300+ brand assets",
+    stat: "80+ brand assets",
   },
   {
     icon: Megaphone,
-    title: "Digital Marketing",
+    title: "Social Media Marketing",
     description:
-      "Data-driven strategies including SEO, PPC, social media, and content marketing to grow your online presence.",
-    tags: ["SEO", "PPC", "Social Media"],
+      "Creative and strategic social media solutions that help your brand reach more people and stay active online.",
+    tags: ["Content Strategy", "Brand Growth", "Audience Engagement"],
     color: "#fcce00",
-    stat: "3× avg. ROI",
+    stat: "4× average reach growth",
   },
   {
-    icon: Layout,
-    title: "UI/UX Design",
+    icon: Search,
+    title: "Search Engine Optimization",
     description:
-      "User-centric interfaces, wireframes, prototypes, and usability testing to create intuitive digital experiences.",
-    tags: ["Wireframing", "Prototyping", "Testing"],
+      "SEO strategies that improve search rankings, increase organic traffic, and help customers discover your business online.",
+    tags: ["Google Ranking", "Keyword Strategy", "Organic Traffic"],
     color: "#089ff1",
-    stat: "98% usability score",
+    stat: "Top-10 ranking results",
   },
   {
     icon: Video,
     title: "Video Editing",
     description:
-      "Professional video production, editing, motion graphics, and post-production for marketing and storytelling.",
-    tags: ["Editing", "Motion", "Color Grading"],
+      "High-quality video editing and motion graphics for marketing content, ads, and promotional storytelling.",
+    tags: ["Editing", "Motion Graphics", "Marketing Content"],
     color: "#02a1fe",
-    stat: "500+ videos produced",
+    stat: "200+ videos produced",
   },
   {
     icon: Mail,
     title: "Email Marketing",
     description:
-      "Automated campaigns, newsletters, segmentation, and analytics that drive engagement and conversions.",
-    tags: ["Automation", "Newsletters", "Analytics"],
+      "Targeted email campaigns and automated workflows that help businesses nurture leads and increase conversions.",
+    tags: ["Automation", "Campaign Strategy", "Analytics"],
     color: "#fcce00",
-    stat: "42% avg. open rate",
+    stat: "35% avg. open rate",
   },
 ];
 
@@ -647,7 +648,7 @@ const Services = () => {
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <Sparkles size={18} color="#fcce00" />
                 <span style={{ color: "rgba(255,255,255,0.80)", fontSize: "0.9rem" }}>
-                  Ready to transform your digital presence?
+                  Ready to grow your brand online?
                 </span>
               </div>
 

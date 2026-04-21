@@ -18,18 +18,18 @@ const services = [
   },
   {
     icon: PencilRuler,
-    title: "UI / UX Design",
-    text: "Clear interfaces and visual systems for modern brands.",
+    title: "Logo Design",
+    text: "Creative and memorable brand identities that help your business stand out.",
   },
   {
     icon: Megaphone,
-    title: "Marketing Assets",
-    text: "Creative campaigns and brand-consistent content.",
+    title: "Social Media Marketing",
+    text: "Strategic content and campaigns that grow your audience and engagement.",
   },
   {
     icon: MonitorSmartphone,
-    title: "Video & Email",
-    text: "Motion content and communication systems.",
+    title: "Search Engine Optimization",
+    text: "Improve visibility on Google and attract more customers organically.",
   },
 ];
 
@@ -47,10 +47,8 @@ export default function Hero() {
         ease: "power3.out",
       });
 
-      // Card floats upward from its resting position, then returns.
-      // Because we added bottom margin, the resting position is now higher.
       gsap.to(cardRef.current, {
-        y: -12,          // moves up 12px, then back to 0 (resting)
+        y: -12,
         repeat: -1,
         yoyo: true,
         duration: 3,
@@ -75,35 +73,25 @@ export default function Hero() {
       <HeroCanvas />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 lg:px-10">
-        {/* CHANGED: added `items-center` to vertically center both columns */}
         <div className="grid items-center gap-14 lg:gap-20 lg:grid-cols-2">
-          {/* LEFT SIDE (unchanged) */}
+          {/* LEFT SIDE */}
           <div className="mx-auto max-w-xl text-center lg:mx-0 lg:text-left">
-            <div
-              data-hero
-              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs tracking-[0.25em] uppercase text-white/70 backdrop-blur"
-            >
-              <span className="h-2 w-2 rounded-full bg-brand-yellow"></span>
-              TechTide Studio
-            </div>
-
+            {/* REMOVED: the "TechTide Studio" badge entirely */}
             <h1
               data-hero
               className="mt-8 text-4xl font-semibold leading-[1.05] text-white sm:text-5xl md:text-6xl lg:text-[70px]"
             >
-              Digital products
+              Digital solutions
               <br />
               built for
-              <span className="text-brand-blue"> modern brands</span>
+              <span className="text-brand-blue"> modern businesses</span>
             </h1>
 
             <p
               data-hero
               className="mt-6 text-base leading-relaxed text-white/70 sm:text-lg"
             >
-              We design and build premium digital experiences, websites,
-              branding systems, and marketing assets that help businesses grow,
-              move faster, and look sharper online.
+              We help businesses grow online with professional branding, modern websites, social media marketing, and SEO solutions built for visibility, trust, and results.
             </p>
 
             <div
@@ -111,11 +99,11 @@ export default function Hero() {
               className="mt-10 flex flex-wrap justify-center gap-4 lg:justify-start"
             >
               <Button href="#contact" variant="yellow">
-                Start a Project
+                Start Your Project
               </Button>
 
               <Button href="#portfolio" variant="secondary">
-                View Work
+                View Our Work
               </Button>
             </div>
 
@@ -123,15 +111,14 @@ export default function Hero() {
               data-hero
               className="mt-10 text-center text-sm text-white/50 lg:text-left"
             >
-              Websites • Branding • Automation • Marketing
+              Logo Design • Website Development • Social Media Marketing • SEO
             </div>
           </div>
 
-          {/* RIGHT SIDE PANEL – CHANGED */}
+          {/* RIGHT SIDE PANEL */}
           <div
             ref={cardRef}
             data-hero
-            // added `mb-8` (bottom margin) to keep the card away from the section bottom
             className="relative mx-auto w-full max-w-lg mb-8"
           >
             <div className="absolute -inset-6 rounded-[32px] bg-gradient-to-br from-brand-blue/20 to-brand-yellow/10 blur-3xl" />
@@ -173,8 +160,7 @@ export default function Hero() {
               </div>
 
               <div className="mt-6 border-t border-white/10 pt-4 text-xs leading-relaxed text-white/60">
-                Built with modern design, strong engineering, and
-                conversion-focused strategy.
+                Built with modern design, smart strategy, and growth-focused marketing.
               </div>
             </div>
           </div>
@@ -182,12 +168,12 @@ export default function Hero() {
       </div>
 
       <a
-  href="#about"
-  className="absolute bottom-10 left-1/2 flex -translate-x-1/2 items-center gap-2 text-xs uppercase tracking-[0.25em] text-white/60 z-20 pointer-events-auto"
->
-  Scroll
-  <ArrowDown size={14} />
-</a>
+        href="#about"
+        className="absolute bottom-10 left-1/2 flex -translate-x-1/2 items-center gap-2 text-xs uppercase tracking-[0.25em] text-white/60 z-20 pointer-events-auto"
+      >
+        Scroll
+        <ArrowDown size={14} />
+      </a>
     </section>
   );
 }
