@@ -102,7 +102,7 @@ export default function Hero() {
                 Start Your Project
               </Button>
 
-              <Button href="#portfolio" variant="secondary">
+              <Button href="#portfolio-premium" variant="secondary">
                 View Our Work
               </Button>
             </div>
