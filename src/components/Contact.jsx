@@ -4,68 +4,79 @@ import emailjs from "@emailjs/browser";
 /* ─── SVG Icons (unchanged) ────────────────────────────────────────── */
 const IconMail = ({ size = 20 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="4" width="20" height="16" rx="2"/>
-    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+    <rect x="2" y="4" width="20" height="16" rx="2" />
+    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
   </svg>
 );
+
 const IconPhone = ({ size = 20 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.06 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z"/>
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.06 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z" />
   </svg>
 );
+
 const IconPin = ({ size = 20 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/>
-    <circle cx="12" cy="10" r="3"/>
+    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z" />
+    <circle cx="12" cy="10" r="3" />
   </svg>
 );
+
 const IconSend = ({ size = 16 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="m22 2-7 20-4-9-9-4z"/>
-    <path d="M22 2 11 13"/>
+    <path d="m22 2-7 20-4-9-9-4z" />
+    <path d="M22 2 11 13" />
   </svg>
 );
+
 const IconArrow = ({ size = 14 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M5 12h14M12 5l7 7-7 7"/>
+    <path d="M5 12h14M12 5l7 7-7 7" />
   </svg>
 );
+
 const IconCheck = ({ size = 15 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M20 6 9 17l-5-5"/>
+    <path d="M20 6 9 17l-5-5" />
   </svg>
 );
+
 const IconStar = ({ size = 12 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="#fcce00" stroke="none">
-    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
   </svg>
 );
+
 const IconSpinner = ({ size = 17 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" style={{ animation: "cts-spin 0.9s linear infinite" }}>
-    <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+    <path d="M21 12a9 9 0 1 1-6.219-8.56" />
   </svg>
 );
+
 const IconClock = ({ size = 14 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="10"/>
-    <path d="M12 6v6l4 2"/>
+    <circle cx="12" cy="12" r="10" />
+    <path d="M12 6v6l4 2" />
   </svg>
 );
+
 const IconUser = ({ size = 15 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="8" r="4"/>
-    <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+    <circle cx="12" cy="8" r="4" />
+    <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
   </svg>
 );
+
 const IconAt = ({ size = 15 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="4"/>
-    <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"/>
+    <circle cx="12" cy="12" r="4" />
+    <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94" />
   </svg>
 );
+
 const IconMsg = ({ size = 15 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
   </svg>
 );
 
@@ -114,8 +125,7 @@ const useTilt = (factor = 8) => {
 
   const leave = useCallback(() => {
     if (ref.current) {
-      ref.current.style.transform =
-        "perspective(900px) rotateX(0) rotateY(0) translateZ(0)";
+      ref.current.style.transform = "perspective(900px) rotateX(0) rotateY(0) translateZ(0)";
     }
   }, []);
 
@@ -123,16 +133,7 @@ const useTilt = (factor = 8) => {
 };
 
 /* ─── Field component ───────────────────────────────────── */
-const Field = ({
-  label,
-  name,
-  type = "text",
-  value,
-  onChange,
-  placeholder,
-  Icon,
-  rows,
-}) => {
+const Field = ({ label, name, type = "text", value, onChange, placeholder, Icon, rows }) => {
   const [focus, setFocus] = useState(false);
 
   const shared = {
@@ -241,9 +242,7 @@ const InfoCard = ({ Icon, label, value, sub, href, accent, delay, visible }) => 
         transitionDelay: `${delay}ms`,
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(30px)",
-        boxShadow: hov
-          ? `0 16px 32px rgba(0,0,0,0.5), 0 0 0 1px ${accent}20`
-          : "none",
+        boxShadow: hov ? `0 16px 32px rgba(0,0,0,0.5), 0 0 0 1px ${accent}20` : "none",
         willChange: "transform",
         cursor: "pointer",
       }}
@@ -541,8 +540,7 @@ export default function Contact() {
                 left: "15%",
                 right: "15%",
                 height: 1,
-                background:
-                  "linear-gradient(90deg,transparent,rgba(8,159,241,0.6),transparent)",
+                background: "linear-gradient(90deg,transparent,rgba(8,159,241,0.6),transparent)",
               }}
             />
 
@@ -572,10 +570,7 @@ export default function Contact() {
               </h3>
             </div>
 
-            <form
-              onSubmit={onSubmit}
-              style={{ display: "flex", flexDirection: "column", gap: 22 }}
-            >
+            <form onSubmit={onSubmit} style={{ display: "flex", flexDirection: "column", gap: 22 }}>
               <Field
                 label="Full name"
                 name="name"
@@ -630,14 +625,8 @@ export default function Contact() {
                   justifyContent: "center",
                   gap: 10,
                   transition: "transform .2s, box-shadow .2s, filter .2s",
-                  transform: btnDown
-                    ? "scale(0.972)"
-                    : btnHov
-                    ? "scale(1.016)"
-                    : "scale(1)",
-                  boxShadow: btnHov
-                    ? "0 12px 40px rgba(8,159,241,0.5)"
-                    : "0 4px 20px rgba(8,159,241,0.22)",
+                  transform: btnDown ? "scale(0.972)" : btnHov ? "scale(1.016)" : "scale(1)",
+                  boxShadow: btnHov ? "0 12px 40px rgba(8,159,241,0.5)" : "0 4px 20px rgba(8,159,241,0.22)",
                   filter: btnHov ? "brightness(1.08)" : "brightness(1)",
                   opacity: sending ? 0.72 : 1,
                 }}
@@ -743,8 +732,7 @@ export default function Contact() {
                   position: "absolute",
                   inset: 0,
                   border: 0,
-                  filter:
-                    "invert(0.88) hue-rotate(190deg) saturate(0.65) brightness(0.82)",
+                  filter: "invert(0.88) hue-rotate(190deg) saturate(0.65) brightness(0.82)",
                 }}
                 allowFullScreen
                 loading="lazy"
@@ -825,8 +813,7 @@ export default function Contact() {
                   left: "15%",
                   right: "15%",
                   height: 1,
-                  background:
-                    "linear-gradient(90deg,transparent,rgba(252,206,0,0.5),transparent)",
+                  background: "linear-gradient(90deg,transparent,rgba(252,206,0,0.5),transparent)",
                 }}
               />
 
@@ -895,8 +882,7 @@ export default function Contact() {
                 style={{
                   padding: "18px 20px",
                   borderRadius: 16,
-                  background:
-                    "linear-gradient(135deg,rgba(252,206,0,0.08),rgba(8,159,241,0.06))",
+                  background: "linear-gradient(135deg,rgba(252,206,0,0.08),rgba(8,159,241,0.06))",
                   border: "1px solid rgba(252,206,0,0.2)",
                 }}
               >

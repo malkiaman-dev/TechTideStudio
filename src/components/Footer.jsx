@@ -11,17 +11,103 @@ import {
 import { FaWhatsapp } from "react-icons/fa";
 import logo from "../assets/techtide-logo.png";
 
-const Footer = () => {
-  const [email, setEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
+const NewsletterBlock = ({
+  newsletterEmail,
+  setNewsletterEmail,
+  newsletterSuccess,
+  newsletterLoading,
+  handleNewsletterVisualSubmit,
+}) => {
+  return (
+    <div>
+      <h3 className="text-lg font-semibold text-white mb-4">Newsletter</h3>
 
-  const handleNewsletter = (e) => {
-    e.preventDefault();
-    if (email) {
-      setSubscribed(true);
-      setEmail("");
-      setTimeout(() => setSubscribed(false), 5000);
-    }
+      <p className="text-white/60 text-sm mb-4">
+        Subscribe to get the latest insights, case studies, and exclusive
+        offers delivered to your inbox.
+      </p>
+
+      <iframe
+        name="mailchimp-hidden-frame"
+        title="mailchimp-hidden-frame"
+        style={{ display: "none" }}
+      />
+
+      <form
+        action="https://gmail.us14.list-manage.com/subscribe/post?u=cf94ca5416f81ca70d5f69d91&id=babb422c8e&f_id=0054b7e5f0"
+        method="post"
+        target="mailchimp-hidden-frame"
+        noValidate
+        className="space-y-3"
+        onSubmit={handleNewsletterVisualSubmit}
+      >
+        <div className="relative">
+          <Mail
+            size={18}
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40"
+          />
+
+          <input
+            type="email"
+            name="EMAIL"
+            value={newsletterEmail}
+            onChange={(e) => setNewsletterEmail(e.target.value)}
+            placeholder="Your email address"
+            required
+            className="w-full bg-white/10 border border-white/10 rounded-lg pl-10 pr-4 py-2.5 text-white placeholder-white/30 focus:outline-none focus:border-[#089ff1] transition-colors text-sm"
+          />
+        </div>
+
+        <div
+          style={{ position: "absolute", left: "-5000px" }}
+          aria-hidden="true"
+        >
+          <input
+            type="text"
+            name="b_cf94ca5416f81ca70d5f69d91_babb422c8e"
+            tabIndex="-1"
+            defaultValue=""
+          />
+        </div>
+
+        <button
+          type="submit"
+          disabled={newsletterLoading}
+          className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-[#089ff1] to-[#02a1fe] text-black font-semibold text-sm transition-all duration-300 hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed"
+        >
+          {newsletterLoading ? "Subscribing..." : "Subscribe"}
+          <Send size={14} />
+        </button>
+
+        {newsletterSuccess && (
+          <div className="flex items-center justify-center gap-2 text-green-400 text-xs pt-1">
+            <span>✓</span>
+            <span>Subscribed successfully.</span>
+          </div>
+        )}
+      </form>
+    </div>
+  );
+};
+
+const Footer = () => {
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterSuccess, setNewsletterSuccess] = useState(false);
+  const [newsletterLoading, setNewsletterLoading] = useState(false);
+
+  const handleNewsletterVisualSubmit = () => {
+    setNewsletterLoading(true);
+    setNewsletterSuccess(false);
+
+    setTimeout(() => {
+      setNewsletterLoading(false);
+      setNewsletterSuccess(true);
+      setNewsletterEmail("");
+
+      setTimeout(() => {
+        setNewsletterSuccess(false);
+      }, 5000);
+    }, 1500);
   };
 
   const quickLinks = [
@@ -71,9 +157,7 @@ const Footer = () => {
       <div className="absolute inset-0 bg-gradient-to-t from-[#089ff1]/5 via-transparent to-transparent pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
-        {/* ===== MOBILE LAYOUT (visible only below md) ===== */}
         <div className="block md:hidden space-y-8">
-          {/* Row 1: Logo + description */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <img
@@ -108,7 +192,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Row 2: Two columns, Quick Links and Services */}
           <div className="grid grid-cols-2 gap-6">
             <div>
               <h3 className="text-lg font-semibold text-white mb-4">
@@ -153,52 +236,16 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Row 3: Newsletter */}
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-4">
-              Newsletter
-            </h3>
-            <p className="text-white/60 text-sm mb-4">
-              Subscribe to get the latest insights, case studies, and exclusive
-              offers delivered to your inbox.
-            </p>
-
-            <form onSubmit={handleNewsletter} className="space-y-3">
-              <div className="relative">
-                <Mail
-                  size={18}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40"
-                />
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your email address"
-                  required
-                  className="w-full bg-white/10 border border-white/10 rounded-lg pl-10 pr-4 py-2.5 text-white placeholder-white/30 focus:outline-none focus:border-[#089ff1] transition-colors text-sm"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-[#089ff1] to-[#02a1fe] text-black font-semibold text-sm transition-all duration-300 hover:scale-[1.02]"
-              >
-                Subscribe
-                <Send size={14} />
-              </button>
-
-              {subscribed && (
-                <p className="text-green-400 text-xs text-center">
-                  Thanks for subscribing!
-                </p>
-              )}
-            </form>
-          </div>
+          <NewsletterBlock
+            newsletterEmail={newsletterEmail}
+            setNewsletterEmail={setNewsletterEmail}
+            newsletterSuccess={newsletterSuccess}
+            newsletterLoading={newsletterLoading}
+            handleNewsletterVisualSubmit={handleNewsletterVisualSubmit}
+          />
         </div>
 
-        {/* ===== DESKTOP LAYOUT (visible from md upwards) ===== */}
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          {/* Column 1: Logo + description */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <img
@@ -233,7 +280,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Column 2: Quick Links */}
           <div>
             <h3 className="text-lg font-semibold text-white mb-5">
               Quick Links
@@ -258,7 +304,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Column 3: Services */}
           <div>
             <h3 className="text-lg font-semibold text-white mb-5">Services</h3>
             <ul className="space-y-2">
@@ -275,50 +320,15 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Column 4: Newsletter */}
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-5">
-              Newsletter
-            </h3>
-            <p className="text-white/60 text-sm mb-4">
-              Subscribe to get the latest insights, case studies, and exclusive
-              offers delivered to your inbox.
-            </p>
-
-            <form onSubmit={handleNewsletter} className="space-y-3">
-              <div className="relative">
-                <Mail
-                  size={18}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40"
-                />
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your email address"
-                  required
-                  className="w-full bg-white/10 border border-white/10 rounded-lg pl-10 pr-4 py-2.5 text-white placeholder-white/30 focus:outline-none focus:border-[#089ff1] transition-colors text-sm"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-[#089ff1] to-[#02a1fe] text-black font-semibold text-sm transition-all duration-300 hover:scale-[1.02]"
-              >
-                Subscribe
-                <Send size={14} />
-              </button>
-
-              {subscribed && (
-                <p className="text-green-400 text-xs text-center">
-                  Thanks for subscribing!
-                </p>
-              )}
-            </form>
-          </div>
+          <NewsletterBlock
+            newsletterEmail={newsletterEmail}
+            setNewsletterEmail={setNewsletterEmail}
+            newsletterSuccess={newsletterSuccess}
+            newsletterLoading={newsletterLoading}
+            handleNewsletterVisualSubmit={handleNewsletterVisualSubmit}
+          />
         </div>
 
-        {/* Bottom bar */}
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-white/40 text-xs">
           <div className="flex flex-wrap justify-center gap-4">
             <span>© 2024 TechTide Studio. All rights reserved.</span>
