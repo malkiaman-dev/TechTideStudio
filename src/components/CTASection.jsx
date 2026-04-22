@@ -204,12 +204,12 @@ const CTASection = () => {
         >
 
           <PrimaryButton href="#contact">
-            Start a Project →
+            Get Started →
           </PrimaryButton>
 
           <SecondaryButton href="tel:6824211029">
             <ChatIcon />
-            Let's Talk
+            Call Us
           </SecondaryButton>
 
         </div>

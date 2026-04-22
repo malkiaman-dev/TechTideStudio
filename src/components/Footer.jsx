@@ -34,7 +34,7 @@ const NewsletterBlock = ({
       />
 
       <form
-        action="https://gmail.us14.list-manage.com/subscribe/post?u=cf94ca5416f81ca70d5f69d91&id=babb422c8e&f_id=0054b7e5f0"
+        action="https://gmail.us16.list-manage.com/subscribe/post?u=7e90e7f636f1b740931a31147&id=34b2c082bf&f_id=00ecc2e1f0"
         method="post"
         target="mailchimp-hidden-frame"
         noValidate
@@ -64,7 +64,7 @@ const NewsletterBlock = ({
         >
           <input
             type="text"
-            name="b_cf94ca5416f81ca70d5f69d91_babb422c8e"
+            name="b_7e90e7f636f1b740931a31147_34b2c082bf"
             tabIndex="-1"
             defaultValue=""
           />

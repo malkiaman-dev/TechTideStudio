@@ -555,7 +555,7 @@ export default function Contact() {
                   margin: "0 0 10px",
                 }}
               >
-                Start a conversation
+                Start a Project
               </p>
               <h3
                 style={{
@@ -576,7 +576,7 @@ export default function Contact() {
                 name="name"
                 value={form.name}
                 onChange={onChange}
-                placeholder="Alex Johnson"
+                placeholder="Enter your full name"
                 Icon={IconUser}
               />
               <Field
@@ -585,7 +585,7 @@ export default function Contact() {
                 type="email"
                 value={form.email}
                 onChange={onChange}
-                placeholder="alex@company.com"
+                placeholder="Enter your email address"
                 Icon={IconAt}
               />
               <Field
