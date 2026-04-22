@@ -203,3 +203,33 @@ a,
 
 /* Optional: if you use any overlay that should block, do it explicitly via JS/CSS,
    but for decorative layers they must never intercept. */
+
+/* Global scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #05070c;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #089ff1 0%, #02a1fe 55%, #fcce00 100%);
+  border-radius: 999px;
+  border: 2px solid #05070c;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #02a1fe 0%, #089ff1 45%, #fcce00 100%);
+}
+
+::-webkit-scrollbar-corner {
+  background: #05070c;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #089ff1 #05070c;
+}

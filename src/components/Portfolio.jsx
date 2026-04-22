@@ -232,9 +232,7 @@ const Counter = ({ value, suffix = "" }) => {
   );
 };
 
-// ============================================
-// FIXED BODY SCROLL LOCK – no position: fixed
-// ============================================
+// Body scroll lock – no position:fixed
 const useBodyScrollLock = (locked) => {
   useEffect(() => {
     if (!locked) return;
@@ -286,6 +284,7 @@ const ProjectCard = ({ project, idx, visible, onOpen }) => {
       onMouseEnter={() => !isTouchDevice() && setHovered(true)}
       onMouseLeave={() => !isTouchDevice() && setHovered(false)}
     >
+      {/* Card content unchanged */}
       <div
         className="relative h-full rounded-2xl overflow-hidden border transition-all duration-500"
         style={{
@@ -441,12 +440,13 @@ const Modal = ({ isOpen, onClose, children }) => {
     >
       <div
         ref={contentRef}
-        className="relative max-w-5xl w-full max-h-[90vh] overflow-y-auto rounded-2xl"
+        className="relative max-w-5xl w-full max-h-[90vh] rounded-2xl modal-scroll-container"
         onClick={(e) => e.stopPropagation()}
         style={{
           background: "linear-gradient(135deg, rgba(10,10,15,0.98) 0%, rgba(5,5,10,0.98) 100%)",
           border: "1px solid rgba(255,255,255,0.1)",
           boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5)",
+          overflowY: "auto", // single scrollbar for entire modal content
           WebkitOverflowScrolling: "touch",
           overscrollBehavior: "contain",
         }}
@@ -570,7 +570,8 @@ const AllProjectsModal = ({ projects, onClose, onSelectProject }) => {
         <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">All Projects</h2>
         <p className="text-white/50 text-sm mb-6">Explore our complete portfolio of work</p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-h-[70vh] overflow-y-auto pr-2">
+        {/* Removed inner scroll – the modal container itself handles scrolling */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {projects.map((project, idx) => (
             <ProjectCard
               key={project.id}
@@ -661,9 +662,6 @@ const Portfolio = () => {
 
   const filtered = activeCategory === "all" ? projects : projects.filter((p) => p.category === activeCategory);
   
-  // ============================================
-  // REPLACED STATS SECTION with portfolio‑focused metrics
-  // ============================================
   const portfolioMetrics = [
     { value: "99", suffix: "%", label: "Success Rate" },
     { value: "10", suffix: "+", label: "Brands Trusted" },
@@ -759,7 +757,7 @@ const Portfolio = () => {
           </p>
         </div>
 
-        {/* REPLACED STATS SECTION */}
+        {/* Stats */}
         <div
           className={`grid grid-cols-2 sm:grid-cols-4 gap-4 mb-14 transition-all duration-700 delay-100 ${
             headerVis ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
@@ -840,6 +838,27 @@ const Portfolio = () => {
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
           overflow: hidden;
+        }
+
+        /* Custom scrollbar for the "All Projects" modal */
+        .modal-scroll-container::-webkit-scrollbar {
+          width: 8px;
+        }
+        .modal-scroll-container::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 10px;
+        }
+        .modal-scroll-container::-webkit-scrollbar-thumb {
+          background: #089ff1;
+          border-radius: 10px;
+        }
+        .modal-scroll-container::-webkit-scrollbar-thumb:hover {
+          background: #02a1fe;
+        }
+        /* Firefox */
+        .modal-scroll-container {
+          scrollbar-width: thin;
+          scrollbar-color: #089ff1 rgba(255, 255, 255, 0.05);
         }
       `}</style>
     </section>
