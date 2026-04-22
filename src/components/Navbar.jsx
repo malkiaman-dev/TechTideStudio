@@ -71,8 +71,15 @@ export default function Navbar() {
     };
   }, []);
 
-  const handleLinkClick = () => {
+  // Handle mobile link click – update active section immediately and close menu
+  const handleMobileLinkClick = (linkId) => {
+    setActiveSection(linkId);
     setMobileOpen(false);
+  };
+
+  // For desktop or any other click that doesn't need to close menu
+  const handleDesktopLinkClick = (linkId) => {
+    setActiveSection(linkId);
   };
 
   const isActive = (linkId) => activeSection === linkId;
@@ -93,7 +100,7 @@ export default function Navbar() {
           `}
         >
           <div className="flex items-center justify-between gap-4">
-            <a href="#home" className="flex items-center gap-3 group">
+            <a href="#home" className="flex items-center gap-3 group" onClick={() => handleDesktopLinkClick("home")}>
               <img
                 src={logo}
                 alt="TechTide Studio"
@@ -106,6 +113,7 @@ export default function Navbar() {
                 <a
                   key={link.label}
                   href={link.href}
+                  onClick={() => handleDesktopLinkClick(link.id)}
                   className={`group relative text-sm font-medium transition-colors duration-300 ${
                     isActive(link.id)
                       ? "text-white"
@@ -127,6 +135,7 @@ export default function Navbar() {
                 href="#contact"
                 variant="yellow"
                 className="px-5 py-3 text-[13px]"
+                onClick={() => handleDesktopLinkClick("contact")}
               >
                 Get Started
               </Button>
@@ -162,7 +171,7 @@ export default function Navbar() {
                     <a
                       key={link.label}
                       href={link.href}
-                      onClick={handleLinkClick}
+                      onClick={() => handleMobileLinkClick(link.id)}
                       className={`rounded-2xl px-4 py-3 text-base font-medium transition-all hover:bg-white/5 hover:text-white hover:pl-6 ${
                         isActive(link.id)
                           ? "bg-white/10 text-white pl-6"
@@ -179,7 +188,7 @@ export default function Navbar() {
                 <Button
                   href="#contact"
                   variant="yellow"
-                  onClick={handleLinkClick}
+                  onClick={() => handleMobileLinkClick("contact")}
                   className="w-full justify-center py-3 text-base font-semibold"
                 >
                   Get Started

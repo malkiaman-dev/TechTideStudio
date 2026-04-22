@@ -1,31 +1,38 @@
-import React from 'react';
+export default function Button({
+  children,
+  href,
+  onClick,
+  type = "button",
+  variant = "primary",
+  className = "",
+}) {
+  const baseClasses =
+    "inline-flex items-center justify-center rounded-full font-semibold transition-all duration-300 focus:outline-none";
 
-const Button = ({ children, href, variant = 'primary', className = '', onClick }) => {
-  const baseClasses = "inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold transition-all duration-300 text-sm md:text-base";
-  
-  const variants = {
-    primary: "bg-[#089ef0] text-black hover:bg-[#02a1fe] hover:scale-105 shadow-lg shadow-[#089ef0]/20",
-    secondary: "border border-[#089ef0] text-[#089ef0] hover:bg-[#089ef0]/10 hover:scale-105",
-    outline: "border border-white/30 text-white hover:border-[#089ef0] hover:text-[#089ef0] hover:bg-[#089ef0]/5",
-    ghost: "text-white/70 hover:text-[#089ef0] hover:bg-white/5",
-    yellow: "bg-[#fcce00] text-black hover:bg-[#fcce00]/80 hover:scale-105 shadow-lg shadow-[#fcce00]/20",
+  const variantClasses = {
+    primary:
+      "bg-gradient-to-r from-[#089ff1] to-[#02a1fe] text-black hover:scale-[1.02]",
+    yellow:
+      "bg-[#fcce00] text-black hover:bg-[#ffd83d] hover:scale-[1.02]",
+    outline:
+      "border border-white/15 bg-white/5 text-white hover:bg-white/10",
   };
-  
-  const combined = `${baseClasses} ${variants[variant]} ${className}`;
-  
+
+  const classes = `${baseClasses} ${
+    variantClasses[variant] || variantClasses.primary
+  } ${className}`.trim();
+
   if (href) {
     return (
-      <a href={href} className={combined}>
+      <a href={href} onClick={onClick} className={classes}>
         {children}
       </a>
     );
   }
-  
+
   return (
-    <button onClick={onClick} className={combined}>
+    <button type={type} onClick={onClick} className={classes}>
       {children}
     </button>
   );
-};
-
-export default Button;
+}
