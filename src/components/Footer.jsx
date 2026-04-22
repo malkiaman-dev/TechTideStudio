@@ -90,7 +90,7 @@ const NewsletterBlock = ({
   );
 };
 
-const Footer = () => {
+const Footer = ({ onOpenPrivacy, onOpenTerms }) => {
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [newsletterSuccess, setNewsletterSuccess] = useState(false);
   const [newsletterLoading, setNewsletterLoading] = useState(false);
@@ -333,12 +333,21 @@ const Footer = () => {
           <div className="flex flex-wrap justify-center gap-4">
             <span>© 2024 TechTide Studio. All rights reserved.</span>
             <span className="hidden md:inline">|</span>
-            <a href="#" className="hover:text-white transition-colors">
+            <button
+              type="button"
+              onClick={onOpenPrivacy}
+              className="hover:text-white transition-colors"
+            >
               Privacy Policy
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
+            </button>
+
+            <button
+              type="button"
+              onClick={onOpenTerms}
+              className="hover:text-white transition-colors"
+            >
               Terms of Service
-            </a>
+            </button>
           </div>
 
           <div className="flex items-center gap-3 flex-wrap justify-center">
