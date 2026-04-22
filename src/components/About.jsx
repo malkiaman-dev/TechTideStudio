@@ -504,7 +504,6 @@ const About = () => {
                   className={`tt-stat${isActive ? (isYellow ? " active-yellow" : " active") : ""}`}
                   data-mouse-card
                   onClick={(e) => handleStatInteract(e, stat.id)}
-                  onTouchStart={(e) => handleStatInteract(e, stat.id)}
                   onMouseEnter={liftIn}
                   onMouseLeave={liftOut}
                   style={{ minHeight: 140 }}
