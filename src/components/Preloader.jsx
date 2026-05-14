@@ -31,6 +31,7 @@ const getStatus = (pct) => {
 
 export default function Preloader({ onComplete }) {
   const containerRef = useRef(null);
+  const barRef = useRef(null);
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -47,11 +48,16 @@ export default function Preloader({ onComplete }) {
       if (!startTs) startTs = ts;
       const elapsed = ts - startTs;
       const raw = Math.min((elapsed / loadDuration) * 100, 100);
+
+      // Update bar width directly via DOM — float precision, no React re-render
+      if (barRef.current) barRef.current.style.width = `${raw}%`;
+      // Update counter display with integer only
       setCount(Math.floor(raw));
 
       if (raw < 100) {
         frame = requestAnimationFrame(tick);
       } else {
+        if (barRef.current) barRef.current.style.width = "100%";
         setCount(100);
         setTimeout(() => {
           gsap.to(containerRef.current, {
@@ -196,13 +202,12 @@ export default function Preloader({ onComplete }) {
               position: "relative",
               overflow: "visible",
             }}>
-              <div style={{
+              <div ref={barRef} style={{
                 height: "100%",
-                width: `${count}%`,
+                width: "0%",
                 borderRadius: 999,
                 background: "linear-gradient(90deg, #089ff1 0%, #02a1fe 55%, #fcce00 100%)",
                 boxShadow: "0 0 12px rgba(8,159,241,0.6)",
-                transition: "width 0.04s linear",
                 position: "relative",
               }}>
                 {count > 0 && count < 100 && (
