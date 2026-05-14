@@ -175,7 +175,6 @@ const GridCard = ({ t, idx, visible }) => {
                 transition: "border 0.3s, box-shadow 0.3s",
               }}
             />
-            <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-black" style={{ background: "#22c55e" }} />
           </div>
           <div className="flex-1 min-w-0">
             <h4 className="font-extrabold text-white text-sm leading-none mb-1">{t.name}</h4>
@@ -275,7 +274,6 @@ const Carousel = ({ visible }) => {
                 className="w-14 h-14 rounded-full object-cover"
                 style={{ border: `2.5px solid ${t.accent}`, boxShadow: `0 0 20px ${t.accent}55` }}
               />
-              <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-2 border-black" style={{ background: "#22c55e" }} />
             </div>
             <div>
               <h4 className="font-extrabold text-white text-base">{t.name}</h4>
