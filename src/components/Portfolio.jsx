@@ -102,7 +102,7 @@ const projects = [
     title: "Social Media Growth Campaign",
     category: "marketing",
     categoryName: "Social Media Marketing",
-    image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=700&h=500&fit=crop",
+    image: "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=700&h=500&fit=crop",
     description: "Creative social media campaign designed to improve reach, consistency, and audience engagement.",
     longDescription:
       "A focused social media marketing project that included branded post design, content direction, posting strategy, and audience-focused creatives to help the business stay visible and active online.",
