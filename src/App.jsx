@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Preloader from "./components/Preloader";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -17,7 +16,6 @@ import PrivacyPolicy from "./components/PrivacyPolicy";
 import TermsOfService from "./components/TermsOfService";
 
 export default function App() {
-  const [loading, setLoading] = useState(true);
   const [legalModal, setLegalModal] = useState(null);
 
   const openPrivacyModal = () => setLegalModal("privacy");
@@ -25,8 +23,6 @@ export default function App() {
   const closeLegalModal = () => setLegalModal(null);
 
   return (
-    <>
-      {loading && <Preloader onComplete={() => setLoading(false)} />}
     <div className="relative min-h-screen overflow-x-hidden bg-transparent text-white">
       <Navbar />
 
@@ -67,6 +63,5 @@ export default function App() {
         <TermsOfService />
       </LegalModal>
     </div>
-    </>
   );
 }
