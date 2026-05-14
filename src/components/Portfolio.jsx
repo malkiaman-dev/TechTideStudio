@@ -18,7 +18,7 @@ const projects = [
     title: "Corporate Business Website",
     category: "web",
     categoryName: "Web Development",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&h=500&fit=crop",
+    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=700&h=500&fit=crop",
     description: "Modern corporate website built to strengthen credibility and generate quality leads.",
     longDescription:
       "A complete business website designed for a service-based company looking to establish a stronger online presence. The project focused on premium visuals, responsive layouts, clear call-to-actions, and a smooth user experience across devices.",
@@ -60,7 +60,7 @@ const projects = [
     title: "Luxury Brand Identity",
     category: "design",
     categoryName: "Logo Design",
-    image: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=700&h=500&fit=crop",
+    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=700&h=500&fit=crop",
     description: "Professional logo and brand identity crafted for a premium business image.",
     longDescription:
       "A complete branding project focused on logo design, typography direction, color styling, and visual consistency. The identity was designed to make the business look established, memorable, and visually refined across digital and print use.",
@@ -81,7 +81,7 @@ const projects = [
     title: "Restaurant Branding Kit",
     category: "design",
     categoryName: "Logo Design",
-    image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=700&h=500&fit=crop",
+    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=700&h=500&fit=crop",
     description: "A branding package including logo, menu styling, and visual assets for a local food business.",
     longDescription:
       "This project focused on creating a cohesive identity for a restaurant brand through logo refinement, menu visuals, color direction, and promotional design elements that could be used both online and offline.",
@@ -102,7 +102,7 @@ const projects = [
     title: "Social Media Growth Campaign",
     category: "marketing",
     categoryName: "Social Media Marketing",
-    image: "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=700&h=500&fit=crop",
+    image: "https://images.unsplash.com/photo-1611262588024-d12430b98920?w=700&h=500&fit=crop",
     description: "Creative social media campaign designed to improve reach, consistency, and audience engagement.",
     longDescription:
       "A focused social media marketing project that included branded post design, content direction, posting strategy, and audience-focused creatives to help the business stay visible and active online.",
