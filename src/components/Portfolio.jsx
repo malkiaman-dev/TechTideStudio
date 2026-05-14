@@ -11,6 +11,12 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { createPortal } from "react-dom";
+import imgCorporate from "../assets/photos/Corporate-Business-Website.png";
+import imgEcommerce from "../assets/photos/E-commerce-Storefront.png";
+import imgLuxuryBrand from "../assets/photos/Luxury-Brand-Identity.png";
+import imgRestaurant from "../assets/photos/Restaurant-Branding-Kit.png";
+import imgSocialMedia from "../assets/photos/Social-Media-Growth-Campaign.png";
+import imgSEO from "../assets/photos/SEO-Visibility-Campaign.png";
 
 const projects = [
   {
@@ -18,7 +24,7 @@ const projects = [
     title: "Corporate Business Website",
     category: "web",
     categoryName: "Web Development",
-    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=700&h=500&fit=crop",
+    image: imgCorporate,
     description: "Modern corporate website built to strengthen credibility and generate quality leads.",
     longDescription:
       "A complete business website designed for a service-based company looking to establish a stronger online presence. The project focused on premium visuals, responsive layouts, clear call-to-actions, and a smooth user experience across devices.",
@@ -39,7 +45,7 @@ const projects = [
     title: "E-commerce Storefront",
     category: "web",
     categoryName: "Web Development",
-    image: "https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=700&h=500&fit=crop",
+    image: imgEcommerce,
     description: "A conversion-focused online store built for product visibility and smooth shopping experience.",
     longDescription:
       "A modern e-commerce storefront created for a growing retail business. The website was designed to make browsing, product discovery, and checkout simpler while presenting the brand in a clean and professional way.",
@@ -60,7 +66,7 @@ const projects = [
     title: "Luxury Brand Identity",
     category: "design",
     categoryName: "Logo Design",
-    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=700&h=500&fit=crop",
+    image: imgLuxuryBrand,
     description: "Professional logo and brand identity crafted for a premium business image.",
     longDescription:
       "A complete branding project focused on logo design, typography direction, color styling, and visual consistency. The identity was designed to make the business look established, memorable, and visually refined across digital and print use.",
@@ -81,7 +87,7 @@ const projects = [
     title: "Restaurant Branding Kit",
     category: "design",
     categoryName: "Logo Design",
-    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=700&h=500&fit=crop",
+    image: imgRestaurant,
     description: "A branding package including logo, menu styling, and visual assets for a local food business.",
     longDescription:
       "This project focused on creating a cohesive identity for a restaurant brand through logo refinement, menu visuals, color direction, and promotional design elements that could be used both online and offline.",
@@ -102,7 +108,7 @@ const projects = [
     title: "Social Media Growth Campaign",
     category: "marketing",
     categoryName: "Social Media Marketing",
-    image: "https://images.unsplash.com/photo-1611262588024-d12430b98920?w=700&h=500&fit=crop",
+    image: imgSocialMedia,
     description: "Creative social media campaign designed to improve reach, consistency, and audience engagement.",
     longDescription:
       "A focused social media marketing project that included branded post design, content direction, posting strategy, and audience-focused creatives to help the business stay visible and active online.",
@@ -123,7 +129,7 @@ const projects = [
     title: "SEO Visibility Campaign",
     category: "marketing",
     categoryName: "SEO",
-    image: "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=700&h=500&fit=crop",
+    image: imgSEO,
     description: "SEO project focused on improving search visibility and helping customers discover the business online.",
     longDescription:
       "An SEO-focused growth project built around keyword targeting, on-page optimization, content improvements, and search visibility strategy to help the client appear more effectively in relevant searches.",
